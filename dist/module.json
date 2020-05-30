@@ -1,0 +1,33 @@
+{
+  "name": "foundry-ping-times",
+  "title": "foundry-ping-times",
+  "description": "",
+  "systems": [],
+  "version": "0.1.0",
+  "author": "",
+  "authors": [
+    {
+      "name": "",
+      "email": "",
+      "url": ""
+    }
+  ],
+  "scripts": [],
+  "esmodules": [
+    "foundry-ping-times.js"
+  ],
+  "styles": [
+    "foundry-ping-times.css"
+  ],
+  "packs": [],
+  "languages": [],
+  "minimumCoreVersion": "0.5.0",
+  "compatibleCoreVersion": "0.5.0",
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "license": "",
+  "readme": "",
+  "bugs": "",
+  "changelog": ""
+}
