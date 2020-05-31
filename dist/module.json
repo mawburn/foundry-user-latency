@@ -1,9 +1,9 @@
 {
-	"name": "Response Times",
+	"name": "ResponseTimes",
 	"title": "Client Response Times",
 	"description": "Ping time display in player list",
 	"systems": [],
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "Tenuki",
 	"authors": [
 		{
