@@ -1,5 +1,5 @@
 {
-	"name": "ResponseTimes",
+	"name": "response-times",
 	"title": "Client Response Times",
 	"description": "Ping time display in player list",
 	"systems": [],

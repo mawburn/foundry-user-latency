@@ -1,6 +1,6 @@
 {
 	"private": true,
-	"name": "ping-times",
+	"name": "response-times",
 	"version": "0.1.2",
 	"description": "Puts server response times in the player list.",
 	"scripts": {
