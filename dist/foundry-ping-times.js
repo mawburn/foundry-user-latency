@@ -1,32 +1,22 @@
-/**
- * This is your JavaScript entry file for Foundry VTT.
- * Register custom settings, sheets, and constants using the Foundry API.
- * Change this heading to be more descriptive to your module, or remove it.
- * Author: [your name]
- * Content License: [copyright and-or license] If using an existing system
- * 					you may want to put a (link to a) license or copyright
- * 					notice here (e.g. the OGL).
- * Software License: [your license] Put your desired license here, which
- * 					 determines how others may use and modify your module
- */
 
 // Import JavaScript modules
-import { registerSettings } from './module/settings.js';
-import { preloadTemplates } from './module/preloadTemplates.js';
+import { registerSettings } from './module/settings.js'
+import { preloadTemplates } from './module/preloadTemplates.js'
+import { doPings } from './module/webping.js'
 
 /* ------------------------------------ */
 /* Initialize module					*/
 /* ------------------------------------ */
 Hooks.once('init', async function() {
-	console.log('foundry-ping-times | Initializing foundry-ping-times');
+	console.log('foundry-ping-times | Initializing foundry-ping-times')
 
 	// Assign custom classes and constants here
 	
 	// Register custom module settings
-	registerSettings();
+	registerSettings()
 	
 	// Preload Handlebars templates
-	await preloadTemplates();
+	await preloadTemplates()
 
 	// Register custom sheets (if any)
 });
@@ -44,6 +34,14 @@ Hooks.once('setup', function() {
 /* ------------------------------------ */
 Hooks.once('ready', function() {
 	// Do anything once the module is ready
+	// this sets up the periodic ping
+	doPings(window.location.href, 20000, 30)
+	//game.user.setFlag("world", "pingTimes", 23)
 });
 
 // Add any additional hooks if necessary
+
+Hooks.on('renderPlayerList', (app, html, data) => {
+	let playerList = document.querySelector(".self" )
+	playerList.insertAdjacentHTML("beforeend", '<span title="Average Response Time of Server" style="padding-right: 5px;float: right;"><i>'+ game.user.getFlag("world", "pingTimes") +'ms</i></span>')
+})

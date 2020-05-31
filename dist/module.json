@@ -1,10 +1,10 @@
 {
-  "name": "foundry-ping-times",
-  "title": "foundry-ping-times",
-  "description": "",
-  "systems": [],
+  "name": "ping-times",
+  "title": "ping-times",
+  "description": "Ping time display in player list",
+  "systems": ["swade"],
   "version": "0.1.0",
-  "author": "",
+  "author": "Tenuki",
   "authors": [
     {
       "name": "",
@@ -23,9 +23,9 @@
   "languages": [],
   "minimumCoreVersion": "0.5.0",
   "compatibleCoreVersion": "0.5.0",
-  "url": "",
-  "manifest": "",
-  "download": "",
+  "url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times",
+  "manifest": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/master/dist/module.json",
+  "download": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/v0.1.0/package/package/foundryvtt-ping-times-v0.1.0.zip",
   "license": "",
   "readme": "",
   "bugs": "",
