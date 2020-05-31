@@ -3,7 +3,7 @@
 	"title": "Client Response Times",
 	"description": "Ping time display in player list",
 	"systems": [],
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"author": "tenuki#5050",
 	"authors": [
 		{
@@ -25,7 +25,7 @@
 	"compatibleCoreVersion": "0.6.0",
 	"url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times",
 	"manifest": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/master/dist/module.json",
-	"download": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/v0.1.1/package/ResponseTimes-v0.1.1.zip",
+	"download": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/v0.1.2/package/ResponseTimes-v0.1.2.zip",
 	"license": "",
 	"readme": "",
 	"bugs": "",
