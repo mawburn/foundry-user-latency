@@ -1,33 +1,33 @@
 {
-  "name": "ping-times",
-  "title": "ping-times",
-  "description": "Ping time display in player list",
-  "systems": ["swade"],
-  "version": "0.1.0",
-  "author": "Tenuki",
-  "authors": [
-    {
-      "name": "",
-      "email": "",
-      "url": ""
-    }
-  ],
-  "scripts": [],
-  "esmodules": [
-    "foundry-ping-times.js"
-  ],
-  "styles": [
-    "foundry-ping-times.css"
-  ],
-  "packs": [],
-  "languages": [],
-  "minimumCoreVersion": "0.5.0",
-  "compatibleCoreVersion": "0.5.0",
-  "url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times",
-  "manifest": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/master/dist/module.json",
-  "download": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/v0.1.0/package/package/foundryvtt-ping-times-v0.1.0.zip",
-  "license": "",
-  "readme": "",
-  "bugs": "",
-  "changelog": ""
+	"name": "Response Times",
+	"title": "Client Response Times",
+	"description": "Ping time display in player list",
+	"systems": [],
+	"version": "0.1.0",
+	"author": "Tenuki",
+	"authors": [
+		{
+			"name": "",
+			"email": "",
+			"url": ""
+		}
+	],
+	"scripts": [],
+	"esmodules": [
+		"foundry-ping-times.js"
+	],
+	"styles": [
+		"foundry-ping-times.css"
+	],
+	"packs": [],
+	"languages": [],
+	"minimumCoreVersion": "0.5.0",
+	"compatibleCoreVersion": "0.6.0",
+	"url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times",
+	"manifest": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/master/dist/module.json",
+	"download": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/v0.1.0/package/Response Times-v0.1.0.zip",
+	"license": "",
+	"readme": "",
+	"bugs": "",
+	"changelog": ""
 }
