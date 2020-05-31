@@ -25,7 +25,7 @@
 	"compatibleCoreVersion": "0.6.0",
 	"url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times",
 	"manifest": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/master/dist/module.json",
-	"download": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/v0.1.0/package/Response Times-v0.1.0.zip",
+	"download": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/v0.1.1/package/ResponseTimes-v0.1.1.zip",
 	"license": "",
 	"readme": "",
 	"bugs": "",
