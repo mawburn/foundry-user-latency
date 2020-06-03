@@ -1,5 +1,7 @@
 export const doPings = function doPings(url, pingInterval, historySize) {
 
+    // TODO: set error codes and display on lable instead of ms
+    // TODO: add a graph of response time history on mouseover....
     let pingQ = createBoundedQueue(historySize)
     pingQ.push(1)
     console.log("ping: pingBuff - " + pingQ.toArray)

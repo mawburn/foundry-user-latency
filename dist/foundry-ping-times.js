@@ -34,9 +34,10 @@ Hooks.once('setup', function() {
 /* ------------------------------------ */
 Hooks.once('ready', function() {
 	// Do anything once the module is ready
+	let pingInterval = game.settings.get("response-times", "pingInterval") || 20000
+	let historySize = game.settings.get( "response-times", "historySize") || 30
 	// this sets up the periodic ping
-	doPings(window.location.href, 20000, 30)
-	//game.user.setFlag("world", "pingTimes", 23)
+	doPings(window.location.href, pingInterval, historySize)
 });
 
 // Add any additional hooks if necessary
