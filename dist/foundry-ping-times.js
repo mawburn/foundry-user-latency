@@ -3,6 +3,7 @@
 import { registerSettings } from './module/settings.js'
 import { preloadTemplates } from './module/preloadTemplates.js'
 import { doPings } from './module/webping.js'
+import { makePopup } from './module/chartResponse.js'
 
 /* ------------------------------------ */
 /* Initialize module					*/
@@ -34,6 +35,7 @@ Hooks.once('setup', function() {
 /* ------------------------------------ */
 Hooks.once('ready', function() {
 	// Do anything once the module is ready
+
 	let pingInterval = game.settings.get("response-times", "pingInterval") || 20000
 	let historySize = game.settings.get( "response-times", "historySize") || 30
 	// this sets up the periodic ping
@@ -43,6 +45,6 @@ Hooks.once('ready', function() {
 // Add any additional hooks if necessary
 
 Hooks.on('renderPlayerList', (app, html, data) => {
-	let playerList = document.querySelector(".self" )
-	playerList.insertAdjacentHTML("beforeend", '<span title="Average Response Time of Server" style="padding-right: 5px;float: right;"><i>'+ game.user.getFlag("world", "pingTimes") +'ms</i></span>')
+	// this does it all
+	makePopup()
 })

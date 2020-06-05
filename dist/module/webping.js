@@ -5,8 +5,8 @@ export const doPings = function doPings(url, pingInterval, historySize) {
     let pingQ = createBoundedQueue(historySize)
     pingQ.push(1)
     console.log("ping: pingBuff - " + pingQ.toArray)
-    game.user.setFlag("world", "pingTimes", pingQ.toArray).catch(err => {
-        console.log("error creating pingTimes ringbuffer")
+    game.user.setFlag("world", "pingArray", pingQ.toArray).catch(err => {
+        console.log("error creating pingTimes ringbuffer and setting it to user data")
     })
     window.setInterval(function () {
         const startTime = (new Date()).getTime()
@@ -20,9 +20,10 @@ export const doPings = function doPings(url, pingInterval, historySize) {
                 const delta = ((new Date()).getTime() - startTime)
                 console.log("ping: sucess - " + delta)
                 pingQ.push(delta)
-                game.user.setFlag("world", "pingTimes", averageArray(pingQ.toArray))
+                game.user.setFlag("world", "pingAverage", averageArray(pingQ.toArray))
+                game.user.setFlag("world", "pingArray", pingQ.toArray)
                 console.log("ping: buffer - " + pingQ.toArray)
-                console.log("ping: flag = " + game.user.getFlag("world", "pingTimes"))
+                console.log("ping: flag = " + game.user.getFlag("world", "pingAverage"))
             })
             .catch(error => {
                 console.error("ping: problem with fetch!!!", error)
@@ -53,5 +54,3 @@ const createBoundedQueue = function(length){
         average : averageArray(buffer)
     }
 }
-
-averageArray([])

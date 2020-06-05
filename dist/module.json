@@ -11,12 +11,15 @@
 			"url": ""
 		}
 	],
-	"scripts": [],
+	"scripts": [
+		"lib/Chart.bundle.js"
+	],
 	"esmodules": [
 		"foundry-ping-times.js"
 	],
 	"styles": [
-		"foundry-ping-times.css"
+		"foundry-ping-times.css",
+		"lib/Chart.css"
 	],
 	"packs": [],
 	"languages": [],

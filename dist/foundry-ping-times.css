@@ -2,4 +2,8 @@
 /*					CSS					*/
 /*  	  Add your styles here			*/
 /* ------------------------------------ */
+/*@import url("./lib/Chart.css");*/
 
+span.shadow:hover {
+    text-shadow: 2px 2px 12px #FF0000;
+}
