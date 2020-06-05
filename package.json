@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "response-times",
-	"version": "0.1.5",
+	"version": "0.2.0",
 	"description": "Puts server response times in the player list.",
 	"scripts": {
 		"package": "gulp package",
