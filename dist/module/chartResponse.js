@@ -1,7 +1,10 @@
-//import './lib/Chart.bundle.js'
+import { logger, LOG_LVL, log_level } from './log.js'
+
 const chartResponse = function (event) {
-    let players = document.getElementById("players")
     let popUp = document.getElementById("pingPop")
+    if ( popUp.style.display == 'block')
+        return
+    let players = document.getElementById("players")
     let ctx = document.getElementById("pingChart")
     doChart(ctx)
     popUp.style.position = "absolute"
@@ -9,7 +12,7 @@ const chartResponse = function (event) {
     popUp.style.left = players.offsetLeft -14 + "px"
     popUp.style.width = players.offsetWidth +"px"
     popUp.style.display = 'block'
-    console.log("ping: pingPop: " + popUp + event)
+    logger(LOG_LVL.DEBUG, "ping: pingPop: " + popUp + event)
     return
 }
 
@@ -25,17 +28,16 @@ export const makePopup = function () {
     popUp.style.borderRadius = "5px"
     popUp.style.boxSizing = "border-box"
     popUp.style.boxShadow = "10 10 20px #c4c4c4;"
-    //popUp.innerHTML = '<h2>Got here!! -tk</h2>'
     popUp.innerHTML = '<canvas id="pingChart" width="400" height="500"></canvas>'
     popUp.addEventListener("click", function (event) {
-        console.log("ping: closing popup -tk")
+        logger(LOG_LVL.DEBUG, "ping: closing popup -tk")
         popUp.style.display = 'none'
     })
 
     let pingSpan = document.createElement("span")
     pingSpan.innerHTML = '<i id="pingText">' + game.user.getFlag("world", "pingAverage") + 'ms</i>'
     pingSpan.classList.add("shadow")
-    pingSpan.title = "Average Response Time of Server"
+    pingSpan.title = "Sliding Window Average Response Time"
     pingSpan.id = "userPing"
     pingSpan.style = 'padding-right: 5px;float: right;'
     pingSpan.addEventListener("click", chartResponse)
@@ -55,7 +57,7 @@ function doChart(ctx) {
         foo[i] = i
     }
 
-    console.log("ping: pingData in doChart - " + JSON.stringify(pingData))
+    logger(LOG_LVL.DEBUG,"ping: pingData in doChart - " + JSON.stringify(pingData))
     let myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -65,7 +67,8 @@ function doChart(ctx) {
                     data: pingData,
                     label: 'response time',
                     borderColor: "#d4d4d4",
-                    fill: false
+                    fill: false,
+                    spanGaps: false
                 }]
         },
         options: {

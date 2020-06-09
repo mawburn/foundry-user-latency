@@ -4,12 +4,15 @@ import { registerSettings } from './module/settings.js'
 import { preloadTemplates } from './module/preloadTemplates.js'
 import { doPings } from './module/webping.js'
 import { makePopup } from './module/chartResponse.js'
+import { logger, LOG_LVL, log_level } from './module/log.js'
+
+logger.log_level = LOG_LVL.DEBUG
 
 /* ------------------------------------ */
 /* Initialize module					*/
 /* ------------------------------------ */
 Hooks.once('init', async function() {
-	console.log('foundry-ping-times | Initializing foundry-ping-times')
+	logger(LOG_LVL.INFO,'foundry-ping-times | Initializing foundry-ping-times')
 
 	// Assign custom classes and constants here
 	
@@ -36,7 +39,7 @@ Hooks.once('setup', function() {
 Hooks.once('ready', function() {
 	// Do anything once the module is ready
 
-	let pingInterval = game.settings.get("response-times", "pingInterval") || 20000
+	let pingInterval = 1000 * game.settings.get("response-times", "pingInterval") || 20
 	let historySize = game.settings.get( "response-times", "historySize") || 30
 	// this sets up the periodic ping
 	doPings(window.location.href, pingInterval, historySize)
