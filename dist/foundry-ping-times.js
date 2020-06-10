@@ -3,10 +3,8 @@
 import { registerSettings } from './module/settings.js'
 import { preloadTemplates } from './module/preloadTemplates.js'
 import { doPings } from './module/webping.js'
-import { makePopup } from './module/chartResponse.js'
-import { logger, LOG_LVL, log_level } from './module/log.js'
-
-logger.log_level = LOG_LVL.DEBUG
+import { makePopup, makePingSpan } from './module/chartResponse.js'
+import { logger, LOG_LVL, getLogLevel, setLogLevel} from './module/log.js'
 
 /* ------------------------------------ */
 /* Initialize module					*/
@@ -38,16 +36,19 @@ Hooks.once('setup', function() {
 /* ------------------------------------ */
 Hooks.once('ready', function() {
 	// Do anything once the module is ready
-
+	logger(LOG_LVL.DEBUG, "ready: Defulat log lvl is - " + getLogLevel())
+	logger(LOG_LVL.DEBUG, "ready: setting log level - " + setLogLevel(LOG_LVL.DEBUG))
 	let pingInterval = 1000 * game.settings.get("response-times", "pingInterval") || 20
 	let historySize = game.settings.get( "response-times", "historySize") || 30
 	// this sets up the periodic ping
 	doPings(window.location.href, pingInterval, historySize)
+	// this makes it all
+	makePopup()
 });
 
 // Add any additional hooks if necessary
 
 Hooks.on('renderPlayerList', (app, html, data) => {
-	// this does it all
-	makePopup()
+	logger(LOG_LVL.DEBUG, "renderPlayerList called -tk - pingSpan: " + document.getElementById("pingSpan"))
+	makePingSpan()
 })

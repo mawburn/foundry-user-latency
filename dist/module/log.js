@@ -8,16 +8,26 @@ export const LOG_LVL = {
     OFF: 0
 }
 
-export let log_level = LOG_LVL.DEBUG
+const namespace = "ping: "
+let log_level = LOG_LVL.DEBUG
+
+export const setLogLevel = function (lvl) {
+    log_level = lvl
+    return log_level
+}
+
+export const getLogLevel = function () {
+    return log_level
+}
 
 export const logger = function logger(lvl, mesg) {
     if (lvl == LOG_LVL.OFF || typeof lvl === "undefined") {
         // nop
     } else {
         if ( lvl >= log_level)
-            console.log(mesg)
+            console.log(namespace + mesg)
         if (lvl === LOG_LVL.ERROR)
-            console.error(mesg)
+            console.error(namespace + mesg)
     }
 }
 

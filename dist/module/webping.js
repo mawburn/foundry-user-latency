@@ -1,4 +1,5 @@
-import { logger, LOG_LVL, log_level } from './log.js'
+import { logger, LOG_LVL } from './log.js'
+import {refreshDisplay} from './chartResponse.js'
 
 export const doPings = function doPings(url, pingInterval, historySize) {
 
@@ -6,9 +7,9 @@ export const doPings = function doPings(url, pingInterval, historySize) {
     // TODO: add a graph of response time history on mouseover....
     let pingQ = createBoundedQueue(historySize)
     pingQ.push(1)
-    logger(LOG_LVL.DEBUG, "ping: pingBuff - " + pingQ.toArray)
+    logger(LOG_LVL.DEBUG, "doPings: pingBuff - " + pingQ.toArray)
     game.user.setFlag("world", "pingArray", pingQ.toArray).catch(err => {
-        logger(LOG_LVL.ERROR, "error creating pingTimes ringbuffer and setting it to user data")
+        logger(LOG_LVL.ERROR, "doPings: error creating pingTimes ringbuffer and setting it to user data")
     })
     window.setInterval(function () {
         const startTime = (new Date()).getTime()
@@ -16,20 +17,21 @@ export const doPings = function doPings(url, pingInterval, historySize) {
             .then(response => {
                 if (!response.ok) {
                     // set this ping to -1
-                    logger(LOG_LVL.DEBUG, "ping: bad response - " + response)
+                    logger(LOG_LVL.DEBUG, "doPings: bad response - " + response)
                     pingQ.push(-1)
                 }
                 const delta = ((new Date()).getTime() - startTime)
-                logger(LOG_LVL.DEBUG, "ping: sucess - " + delta)
+                logger(LOG_LVL.DEBUG, "doPings: sucess - " + delta)
                 pingQ.push(delta)
                 let data = processArray(pingQ.toArray)
                 game.user.setFlag("world", "pingAverage", data.avg)
                 game.user.setFlag("world", "pingArray", pingQ.toArray)
-                logger(LOG_LVL.DEBUG, "ping: buffer - " + pingQ.toArray)
-                logger(LOG_LVL.DEBUG, "ping: flag = " + game.user.getFlag("world", "pingAverage"))
+                logger(LOG_LVL.DEBUG, "doPings: buffer - " + pingQ.toArray)
+                logger(LOG_LVL.DEBUG, "doPings: flag = " + game.user.getFlag("world", "pingAverage"))
+                refreshDisplay()
             })
             .catch(error => {
-                logger(LOG_LVL.ERROR, "ping: problem with fetch!!!", error)
+                logger(LOG_LVL.ERROR, "doPings: problem with fetch!!!", error)
                 pingQ.push(-255)
             })
     }, pingInterval)
@@ -43,19 +45,19 @@ function processArray(array) {
     let minPing = 0
     for(let i = 0; i < array.length; i++) {
         if ( array[i] == 0) {           // false data, ignore, usually first datapoint
-            processedArray[i] = 0
+            processedArray[i] = NaN
             --goodDataSize
-        } else if ( array[i] == -255) {    // fetch error, server, network, etc down.
-            processedArray[i] = 0
+        } else if ( array[i] == -255) {    // TODO: fetch error, server, network, etc down.
+            processedArray[i] = NaN
             --goodDataSize
-        } else if ( array[i] === -1) {      // bad http response: server had problems.  This is a temp hack, eventually still record the response but mark server problem
-            processedArray[i] = 0
+        } else if ( array[i] === -1) {      // TODO: bad http response: server had problems.  This is a temp hack, eventually still record the response but mark server problem
+            processedArray[i] = NaN
             --goodDataSize
         } else {                            // add it in
             total += array[i]
         }
     }
-    // avg, min, max, processedArray
+    // avg, min, max, bad, processedArray
     return { avg: Math.round(total / goodDataSize), min: minPing, max: maxPing, bad: array.length - goodDataSize, data: processedArray }
 }
 // bounded queue
