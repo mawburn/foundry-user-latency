@@ -8,7 +8,7 @@ export const doPings = function doPings(url, pingInterval, historySize) {
     let pingQ = createBoundedQueue(historySize)
     pingQ.push(1)
     logger(LOG_LVL.DEBUG, "doPings: pingBuff - " + pingQ.toArray)
-    game.user.setFlag("world", "pingArray", pingQ.toArray).catch(err => {
+    game.user.setFlag("world", "pingData", processArray(pingQ.toArray)).catch(err => {
         logger(LOG_LVL.ERROR, "doPings: error creating pingTimes ringbuffer and setting it to user data")
     })
     window.setInterval(function () {
@@ -23,11 +23,10 @@ export const doPings = function doPings(url, pingInterval, historySize) {
                 const delta = ((new Date()).getTime() - startTime)
                 logger(LOG_LVL.DEBUG, "doPings: sucess - " + delta)
                 pingQ.push(delta)
-                let data = processArray(pingQ.toArray)
-                game.user.setFlag("world", "pingAverage", data.avg)
-                game.user.setFlag("world", "pingArray", pingQ.toArray)
-                logger(LOG_LVL.DEBUG, "doPings: buffer - " + pingQ.toArray)
-                logger(LOG_LVL.DEBUG, "doPings: flag = " + game.user.getFlag("world", "pingAverage"))
+                let pings = processArray(pingQ.toArray)
+                game.user.setFlag("world", "pingData", pings)
+                logger(LOG_LVL.DEBUG, "doPings: set pingData to - " + pings.data)
+                logger(LOG_LVL.DEBUG, "doPings: set pingAverage to - " + pings.avg)
                 refreshDisplay()
             })
             .catch(error => {
@@ -39,26 +38,23 @@ export const doPings = function doPings(url, pingInterval, historySize) {
 
 function processArray(array) {
     let total = 0
-    let goodDataSize = array.length
-    let processedArray = []
-    let maxPing = 0
-    let minPing = 0
+    let goodData = []       // Data with non error values used to calculate average, median, etc
+    let processedArray = [] // Data with graphing data including NaN
     for(let i = 0; i < array.length; i++) {
         if ( array[i] == 0) {           // false data, ignore, usually first datapoint
             processedArray[i] = NaN
-            --goodDataSize
         } else if ( array[i] == -255) {    // TODO: fetch error, server, network, etc down.
             processedArray[i] = NaN
-            --goodDataSize
         } else if ( array[i] === -1) {      // TODO: bad http response: server had problems.  This is a temp hack, eventually still record the response but mark server problem
             processedArray[i] = NaN
-            --goodDataSize
-        } else {                            // add it in
+        } else {
+            processedArray[i] = array[i]// add it in
             total += array[i]
+            goodData.push(array[i])
         }
     }
     // avg, min, max, bad, processedArray
-    return { avg: Math.round(total / goodDataSize), min: minPing, max: maxPing, bad: array.length - goodDataSize, data: processedArray }
+    return { avg: average(goodData), median: median(goodData), min: Math.min(...goodData), max: Math.max(...goodData), bad: array.length - goodData.length, data: processedArray }
 }
 // bounded queue
 // So I only have to think this through once. probably unnecessary for normal people
@@ -68,10 +64,28 @@ const createBoundedQueue = function(length){
         get  : function(key){return buffer[key];},
         push : function(item){
             if (buffer.length == length)
-                buffer.pop()
-            buffer.unshift(item)
+                buffer.shift()
+            buffer.push(item)
             },
         toArray : buffer,
         average : processArray(buffer)
     }
+}
+
+// WTF this language's Math has no average or median function?!?  WHY.
+function average(array) {
+    if ( typeof array == "undefined " || array == null)
+        return NaN
+    let total = 0;
+    for(let i = 0; i < array.length; i++) {
+        total += array[i];
+    }
+    return total / array.length;
+}
+
+function median(array) {
+    if ( typeof array == "undefined " || array == null || array == 1)
+        return NaN
+    const mid = Math.floor(array.length / 2), nums = [...array].sort((a, b) => a - b);
+    return array.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
 }

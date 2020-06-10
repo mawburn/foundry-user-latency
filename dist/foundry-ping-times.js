@@ -36,19 +36,19 @@ Hooks.once('setup', function() {
 /* ------------------------------------ */
 Hooks.once('ready', function() {
 	// Do anything once the module is ready
-	logger(LOG_LVL.DEBUG, "ready: Defulat log lvl is - " + getLogLevel())
+	logger(LOG_LVL.DEBUG, "ready: default log lvl is - " + getLogLevel())
 	logger(LOG_LVL.DEBUG, "ready: setting log level - " + setLogLevel(LOG_LVL.DEBUG))
 	let pingInterval = 1000 * game.settings.get("response-times", "pingInterval") || 20
 	let historySize = game.settings.get( "response-times", "historySize") || 30
 	// this sets up the periodic ping
 	doPings(window.location.href, pingInterval, historySize)
-	// this makes it all
+	// this makes the popup with the graph
 	makePopup()
 });
 
 // Add any additional hooks if necessary
 
 Hooks.on('renderPlayerList', (app, html, data) => {
-	logger(LOG_LVL.DEBUG, "renderPlayerList called -tk - pingSpan: " + document.getElementById("pingSpan"))
-	makePingSpan()
+	logger(LOG_LVL.DEBUG, "renderPlayerList called")
+	makePingSpan() // TODO: unfortunately I have to create the pingspan every freakin time this gets called - considering putting the gui element someplace else..
 })
