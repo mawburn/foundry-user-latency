@@ -100,6 +100,11 @@ function makeChart(ctx, pingData) {
                 display: false,
                 text: 'Response Times'
             },
+            legend: {
+                labels: {
+                    boxWidth: 10
+                }
+            },
             tooltips: {
                 enabled: true
             },
