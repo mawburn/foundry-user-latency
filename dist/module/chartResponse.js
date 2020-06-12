@@ -20,7 +20,6 @@ export const makePopup = function () { // TODO: fix location when people join or
         popUp.style.width = players.offsetWidth + "px"
         popUp.style.marginLeft = players.offsetLeft + "px"
         popUp.style.marginBottom = "15 px"
-        popUp.style.display = 'block'
         //popUp.style.height = "500px"
         popUp.innerHTML = '<canvas id="pingChart" width="400" height="500"></canvas>'
         popUp.addEventListener("click", function (event) {
@@ -39,7 +38,10 @@ export const makePingSpan = function () {
     if (typeof pingSpan === "undefined" || pingSpan == null) {
         let pingSpan = document.createElement("span")
         let popUp = document.getElementById("pingPop")
-        pingSpan.innerHTML = '<i id="pingText">' + game.user.getFlag("world", "pingData").median + 'ms</i>'
+        let ping = game.user.getFlag("world", "pingData").median
+        if (ping == null || ping == 0 || typeof ping == "undefined")
+            ping = "-- "
+        pingSpan.innerHTML = '<i id="pingText">' + ping + 'ms</i>'
         pingSpan.classList.add("shadow")
         pingSpan.title = "Sliding Window Median Response Time"
         pingSpan.id = "userPing"
@@ -63,7 +65,7 @@ export const refreshDisplay = function () {
     // updatePing(document.getElementById("userPing"))  // not doing this on pings now, it's the median anyway, can wait until the user list refreshes ( more frequent anyway )
 }
 
-
+// TODO, purhaps update the charte with single points and call 'chart.update(0)'
 function makeChart(ctx, pingData) {
     let foo = new Array(pingData.data.length)
     let bar = new Array(pingData.data.length)
@@ -97,7 +99,17 @@ function makeChart(ctx, pingData) {
             title: {
                 display: false,
                 text: 'Response Times'
-            }
+            },
+            tooltips: {
+                enabled: true
+            },
+            animation: {
+                duration: 0 // general animation time
+            },
+            hover: {
+                animationDuration: 0 // duration of animations when hovering an item
+            },
+            responsiveAnimationDuration: 0 // animation duration after a resize
         }
     })
 
