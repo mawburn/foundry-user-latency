@@ -48,6 +48,7 @@ export const makePingSpan = function () {
         pingSpan.style = 'padding-right: 5px;float: right;'
         pingSpan.addEventListener("click", function () {
             logger(LOG_LVL.DEBUG, "makePopup: recieved click, displaying chart")
+            popUp.style.bottom = players.offsetHeight + 10 + "px"
             popUp.style.display = 'block'
         })
 
@@ -102,7 +103,7 @@ function makeChart(ctx, pingData) {
             },
             legend: {
                 labels: {
-                    boxWidth: 10
+                    boxWidth: 5
                 }
             },
             tooltips: {
