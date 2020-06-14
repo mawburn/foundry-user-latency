@@ -36,6 +36,10 @@ Hooks.once('setup', function() {
 /* ------------------------------------ */
 Hooks.once('ready', function() {
 	// Do anything once the module is ready
+	const mins = game.settings.get("response-times", "pingInterval")
+	if (mins >= 300) {
+		ui.notifications.warn("Response Times: the interval setting is in seconds not milliseconds.  Your response time check interval is currently set to "+mins+" minutes.")
+	}
 	logger(LOG_LVL.DEBUG, "ready: default log lvl is - " + getLogLevel())
 	logger(LOG_LVL.DEBUG, "ready: setting log level - " + setLogLevel(LOG_LVL.DEBUG))
 	let pingInterval = 1000 * game.settings.get("response-times", "pingInterval") || 20
