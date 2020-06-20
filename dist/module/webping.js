@@ -1,12 +1,12 @@
 import { logger, LOG_LVL } from './log.js'
-import {refreshDisplay} from './chartResponse.js'
+import {updateChart} from './chartResponse.js'
 
 export const doPings = function doPings(url, pingInterval, historySize) {
 
     // TODO: set error codes and display on lable instead of ms
     // TODO: add a graph of response time history on mouseover....
     let pingQ = createBoundedQueue(historySize)
-    pingQ.push(1)
+    pingQ.push(5)
     logger(LOG_LVL.DEBUG, "doPings: pingBuff - " + pingQ.toArray)
     game.user.setFlag("world", "pingData", processArray(pingQ.toArray)).catch(err => {
         logger(LOG_LVL.ERROR, "doPings: error creating pingTimes ringbuffer and setting it to user data")
@@ -27,7 +27,12 @@ export const doPings = function doPings(url, pingInterval, historySize) {
                 game.user.setFlag("world", "pingData", pings)
                 logger(LOG_LVL.DEBUG, "doPings: set pingData to - " + pings.data)
                 logger(LOG_LVL.DEBUG, "doPings: set pingAverage to - " + pings.avg)
-                refreshDisplay()
+                try {
+                    updateChart(delta, pings.median)
+                    logger(LOG_LVL.DEBUG, "updated chart")
+                } catch (e ) {
+                    logger(LOG_LVL.ERROR, "doPings: error updating chart " + e)
+                }
             })
             .catch(error => {
                 logger(LOG_LVL.ERROR, "doPings: problem with fetch!!!", error)
