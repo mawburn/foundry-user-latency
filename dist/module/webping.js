@@ -1,16 +1,16 @@
 import { logger, LOG_LVL } from './log.js'
 import {updateChart} from './chartResponse.js'
 
+export let pingData = processArray([]) // this holds processed data, pingQ is the raw data
+logger(LOG_LVL.DEBUG, "chartResponse: pingData: ", JSON.stringify(pingData))
+
 export const doPings = function doPings(url, pingInterval, historySize) {
 
     // TODO: set error codes and display on lable instead of ms
     // TODO: add a graph of response time history on mouseover....
-    let pingQ = createBoundedQueue(historySize)
+    let pingQ = createBoundedQueue(historySize) // this holds the raw ping data, processed data is pingData
     pingQ.push(5)
     logger(LOG_LVL.DEBUG, "doPings: pingBuff - " + pingQ.toArray)
-    game.user.setFlag("world", "pingData", processArray(pingQ.toArray)).catch(err => {
-        logger(LOG_LVL.ERROR, "doPings: error creating pingTimes ringbuffer and setting it to user data")
-    })
     window.setInterval(function () {
         const startTime = (new Date()).getTime()
         fetch(url)
@@ -23,12 +23,11 @@ export const doPings = function doPings(url, pingInterval, historySize) {
                 const delta = ((new Date()).getTime() - startTime)
                 logger(LOG_LVL.DEBUG, "doPings: sucess - " + delta)
                 pingQ.push(delta)
-                let pings = processArray(pingQ.toArray)
-                game.user.setFlag("world", "pingData", pings)
-                logger(LOG_LVL.DEBUG, "doPings: set pingData to - " + pings.data)
-                logger(LOG_LVL.DEBUG, "doPings: set pingAverage to - " + pings.avg)
+                pingData = processArray(pingQ.toArray)
+                logger(LOG_LVL.DEBUG, "doPings: set pingData.data to - " + pingData.data)
+                logger(LOG_LVL.DEBUG, "doPings: set pingData.median to - " + pingData.median)
                 try {
-                    updateChart(delta, pings.median)
+                    updateChart(delta, pingData.median)
                     logger(LOG_LVL.DEBUG, "updated chart")
                 } catch (e ) {
                     logger(LOG_LVL.ERROR, "doPings: error updating chart " + e)
