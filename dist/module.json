@@ -23,6 +23,7 @@
 	],
 	"packs": [],
 	"languages": [],
+	"socket": true,
 	"minimumCoreVersion": "0.6.4",
 	"compatibleCoreVersion": "0.6.4",
 	"url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times",

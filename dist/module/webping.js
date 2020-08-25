@@ -11,32 +11,9 @@ export const doPings = function doPings(url, pingInterval, historySize) {
     let pingQ = createBoundedQueue(historySize) // this holds the raw ping data, processed data is pingData
     pingQ.push(5)
     logger(LOG_LVL.DEBUG, "doPings: pingBuff - " + pingQ.toArray)
-    window.setInterval(function () {
-        const startTime = (new Date()).getTime()
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    // set this ping to -1
-                    logger(LOG_LVL.DEBUG, "doPings: bad response - " + response)
-                    pingQ.push(-1)
-                }
-                const delta = ((new Date()).getTime() - startTime)
-                logger(LOG_LVL.DEBUG, "doPings: sucess - " + delta)
-                pingQ.push(delta)
-                pingData = processArray(pingQ.toArray)
-                logger(LOG_LVL.DEBUG, "doPings: set pingData.data to - " + pingData.data)
-                logger(LOG_LVL.DEBUG, "doPings: set pingData.median to - " + pingData.median)
-                try {
-                    updateChart(delta, pingData.median)
-                    logger(LOG_LVL.DEBUG, "updated chart")
-                } catch (e ) {
-                    logger(LOG_LVL.ERROR, "doPings: error updating chart " + e)
-                }
-            })
-            .catch(error => {
-                logger(LOG_LVL.ERROR, "doPings: problem with fetch!!!", error)
-                pingQ.push(-255)
-            })
+
+    window.setInterval(async function () {
+        await ping(url, pingQ)
     }, pingInterval)
 }
 
@@ -92,4 +69,40 @@ function median(array) {
         return NaN
     const mid = Math.floor(array.length / 2), nums = [...array].sort((a, b) => a - b);
     return array.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+}
+
+function ping(url, pingQ) {
+    const startTime = (new Date()).getTime()
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                // set this ping to -1
+                logger(LOG_LVL.DEBUG, "doPings: bad response - " + response)
+                pingQ.push(-1)
+            }
+            const delta = ((new Date()).getTime() - startTime)
+            logger(LOG_LVL.DEBUG, "doPings: sucess - " + delta)
+            pingQ.push(delta)
+            pingData = processArray(pingQ.toArray)
+            pong(game.user.name, pingData.median)
+            logger(LOG_LVL.DEBUG, "doPings: set pingData.data to - " + pingData.data)
+            logger(LOG_LVL.DEBUG, "doPings: set pingData.median to - " + pingData.median)
+            try {
+                updateChart(delta, pingData.median)
+                logger(LOG_LVL.DEBUG, "updated chart")
+            } catch (e ) {
+                logger(LOG_LVL.ERROR, "doPings: error updating chart " + e)
+            }
+        })
+        .catch(error => {
+            logger(LOG_LVL.ERROR, "doPings: problem with fetch!!!", error)
+            pingQ.push(-255)
+        })
+}
+
+function pong(username, pingtime) {
+    game.socket.emit('module.response-times', {
+        username: username,
+        time: pingtime
+    });
 }

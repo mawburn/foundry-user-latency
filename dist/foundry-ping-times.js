@@ -10,6 +10,7 @@ import { logger, LOG_LVL, getLogLevel, setLogLevel} from './module/log.js'
 /* Initialize module					*/
 /* ------------------------------------ */
 Hooks.once('init', async function() {
+	console.log("ping: crap crap")
 	logger(LOG_LVL.INFO,'foundry-ping-times | Initializing foundry-ping-times')
 
 	// Assign custom classes and constants here
@@ -21,14 +22,18 @@ Hooks.once('init', async function() {
 	await preloadTemplates()
 
 	// Register custom sheets (if any)
+	logger(LOG_LVL.INFO, "init finished")
 });
 
 /* ------------------------------------ */
 /* Setup module							*/
 /* ------------------------------------ */
 Hooks.once('setup', function() {
+	logger(LOG_LVL.INFO, "module setup started")
 	// Do anything after initialization but before
+
 	// ready
+	logger(LOG_LVL.INFO, "module setup finished")
 });
 
 /* ------------------------------------ */
@@ -48,6 +53,7 @@ Hooks.once('ready', function() {
 	doPings(window.location.href, pingInterval, historySize)
 	// this makes the popup with the graph
 	makePopup()
+	// register a listener on the socket
 });
 
 // Add any additional hooks if necessary

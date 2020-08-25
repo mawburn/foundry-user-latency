@@ -4,6 +4,9 @@ import {pingData} from './webping.js'
 export let responseTimesChart = null // not proud of this TODO: fix global variable dependancy through better design
 
 export const makePopup = function () { // TODO: fix location when people join or when the list is expanded.
+    game.socket.on('module.response-times', (data) => {
+        logger(LOG_LVL.INFO, "got here:" + JSON.stringify(data))
+    });
     let popUp = document.getElementById("pingPop")
     if (typeof popUp === "undefined" || popUp == null) {
         let players = document.getElementById("players")
@@ -66,6 +69,7 @@ function updatePingText () {
     let pingMedian = isNaN(pingData.median) ? "-- " : pingData.median
     document.getElementById("pingText").innerHTML = '<i id="pingText">' + pingMedian + 'ms</i>'
 }
+
 export const updateChart = function (singlePing, newMedian) {
     let pingInterval = game.settings.get("response-times", "pingInterval") || 20
     let historySize = game.settings.get( "response-times", "historySize") || 30
@@ -165,4 +169,3 @@ function makeChart(ctx, pingData) {
 
     return myChart
 }
-
