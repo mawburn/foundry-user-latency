@@ -73,7 +73,7 @@ export class ChartResponse {
                 pingSpan.innerHTML = '<i id="pingText_' + playerId + '"></i>'
                 pingSpan.title = "Sliding Window Median Response Time"
                 pingSpan.id = "userPing"
-                pingSpan.style = 'flex: 0; padding-left: 3px; padding-right: 3px; background-color: rgb(105,105,105,.5); border: 1px solid black; border-radius: 4px;'
+                pingSpan.style = 'flex: 0; padding-left: 3px; padding-right: 3px; background-color: rgb(0,0,0,.4); border-radius: 4px;' // border: 1px solid black;
                 if (playerId === game.userId) {
                     pingSpan.classList.add("shadow")
                     pingSpan.addEventListener("click", function () {
