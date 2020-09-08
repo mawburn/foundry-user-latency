@@ -2,16 +2,18 @@
 // Import JavaScript modules
 import { registerSettings } from './module/settings.js'
 import { preloadTemplates } from './module/preloadTemplates.js'
-import { doPings } from './module/webping.js'
-import { makePopup, makePingSpan } from './module/chartResponse.js'
-import { logger, LOG_LVL, getLogLevel, setLogLevel} from './module/log.js'
+import { WebPing } from './module/webping.js'
+import { ChartResponse } from './module/chartResponse.js'
+import { Logger } from './module/log.js'
 
+let logger = new Logger("foundry-ping-times", Logger.LOG_LVL.DEBUG)
+let chartResponse = new ChartResponse()
+let webPing = new WebPing()
 /* ------------------------------------ */
 /* Initialize module					*/
 /* ------------------------------------ */
 Hooks.once('init', async function() {
-	console.log("ping: crap crap")
-	logger(LOG_LVL.INFO,'foundry-ping-times | Initializing foundry-ping-times')
+	logger.log(Logger.LOG_LVL.INFO,'foundry-ping-times | Initializing foundry-ping-times')
 
 	// Assign custom classes and constants here
 	
@@ -22,18 +24,18 @@ Hooks.once('init', async function() {
 	await preloadTemplates()
 
 	// Register custom sheets (if any)
-	logger(LOG_LVL.INFO, "init finished")
+	logger.log(Logger.LOG_LVL.INFO, "init finished")
 });
 
 /* ------------------------------------ */
 /* Setup module							*/
 /* ------------------------------------ */
 Hooks.once('setup', function() {
-	logger(LOG_LVL.INFO, "module setup started")
+	logger.log(Logger.LOG_LVL.INFO, "module setup started")
 	// Do anything after initialization but before
 
 	// ready
-	logger(LOG_LVL.INFO, "module setup finished")
+	logger.log(Logger.LOG_LVL.INFO, "module setup finished")
 });
 
 /* ------------------------------------ */
@@ -45,20 +47,23 @@ Hooks.once('ready', function() {
 	if (mins >= 300) {
 		ui.notifications.warn("Response Times: the interval setting is in seconds not milliseconds.  Your response time check interval is currently set to "+mins+" minutes.")
 	}
-	logger(LOG_LVL.DEBUG, "ready: default log lvl is - " + getLogLevel())
-	logger(LOG_LVL.DEBUG, "ready: setting log level - " + setLogLevel(LOG_LVL.DEBUG))
+	logger.log(Logger.LOG_LVL.DEBUG, "ready: default log lvl is - " + logger.getLogLevel())
+	logger.log(Logger.LOG_LVL.DEBUG, "ready: setting log level - " + logger.setLogLevel(Logger.LOG_LVL.DEBUG))
 	let pingInterval = 1000 * game.settings.get("response-times", "pingInterval") || 20
 	let historySize = game.settings.get( "response-times", "historySize") || 30
+	//
+
+	chartResponse.registerListeners()
 	// this sets up the periodic ping
-	doPings(window.location.href, pingInterval, historySize)
+	webPing.doPings(window.location.href, pingInterval, historySize)
 	// this makes the popup with the graph
-	makePopup()
+	chartResponse.makePopup()
 	// register a listener on the socket
 });
 
 // Add any additional hooks if necessary
 
 Hooks.on('renderPlayerList', (app, html, data) => {
-	logger(LOG_LVL.DEBUG, "renderPlayerList called")
-	makePingSpan() // TODO: unfortunately I have to create the pingspan every freakin time this gets called - considering putting the gui element someplace else..
+	logger.log(Logger.LOG_LVL.DEBUG, "renderPlayerList called")
+	chartResponse.makePingSpan() // TODO: unfortunately I have to create the pingspan every freakin time this gets called - considering putting the gui element someplace else..
 })

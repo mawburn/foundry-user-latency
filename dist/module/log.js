@@ -1,34 +1,41 @@
-// Yes I know about console.debug, console.error, etc.  I have reasons mostly around non-techie users.
-export const LOG_LVL = {
-    ALL: 5,
-    DEBUG: 4,
-    WARN: 3,
-    INFO: 2,
-    ERROR: 1,
-    OFF: 0
-}
+export class Logger
+{
+    constructor(namespace, loglevel) {
+        this.namespace = namespace // wtf no private fields firefox...
+        this.log_level = loglevel
+    }
+    static LOG_LVL = {
+        ALL: 5,
+        DEBUG: 4,
+        WARN: 3,
+        INFO: 2,
+        ERROR: 1,
+        OFF: 0
+    }
 
-const namespace = "ping: "
-let log_level = LOG_LVL.DEBUG
+    namespace = "not set"
+    log_level = Logger.LOG_LVL.DEBUG
 
-export const setLogLevel = function (lvl) {
-    log_level = lvl
-    return log_level
-}
+    setLogLevel = function (lvl) {
+        this.log_level = lvl
+        return this.log_level
+    }
 
-export const getLogLevel = function () {
-    return log_level
-}
+    getLogLevel = function () {
+        return this.log_level
+    }
 
-export const logger = function logger(lvl, mesg) {
-    if (lvl == LOG_LVL.OFF || typeof lvl === "undefined") {
-        // nop
-    } else {
-        if ( lvl >= log_level)
-            console.log(namespace + mesg)
-        if (lvl === LOG_LVL.ERROR)
-            console.error(namespace + mesg)
+    log(lvl, mesg) {
+        if (lvl == Logger.LOG_LVL.OFF || typeof lvl === "undefined") {
+            // nop
+        } else {
+            if (lvl >= this.log_level)
+                console.log(this.namespace +': ' + mesg)
+            if (lvl === Logger.LOG_LVL.ERROR)
+                console.error(this.namespace +': ' + mesg)
+        }
     }
 }
 
-logger(LOG_LVL.INFO, "log.js loaded..")
+let logger = new Logger("log.js", Logger.LOG_LVL.INFO)
+logger.log(Logger.LOG_LVL.INFO, "log.js loaded..")
