@@ -33,7 +33,7 @@ export class ChartResponse {
             logger.log(Logger.LOG_LVL.INFO, "got here:" + JSON.stringify(data))
         });
         let popUp = document.getElementById("pingPop")
-        if (typeof popUp === "undefined" || popUp == null) {
+        if (typeof popUp === "undefined" || popUp === null) {
             let players = document.getElementById("players")
             popUp = document.createElement("div")
             popUp.id = 'pingPop'
@@ -62,13 +62,14 @@ export class ChartResponse {
         } else {
             logger.log(Logger.LOG_LVL.DEBUG, "makePopup: popUp already defined, players is: ")
         }
+        this.makePingSpan()
     }
 
     makePingSpan() {
-        let pingSpan = document.getElementById("pingSpan")
-        if (typeof pingSpan === "undefined" || pingSpan == null) {
-            let players = document.getElementById("players")
-            for( let playerId in this.playerPingTimes) {
+        let players = document.getElementById("players")
+        for (let playerId in this.playerPingTimes) {
+            let pingCheck = document.getElementById("pingText_" + playerId)
+            if (typeof pingCheck === "undefined" || pingCheck === null) {
                 let pingSpan = document.createElement("span")
                 pingSpan.innerHTML = '<i id="pingText_' + playerId + '"></i>'
                 pingSpan.title = "Sliding Window Median Response Time"
@@ -92,16 +93,14 @@ export class ChartResponse {
                         playerList.insertAdjacentElement("afterend", pingSpan)
                 }
             }
-        } else {
-            logger.log(Logger.LOG_LVL.DEBUG, "makePop: pingSpan already defined, pingSpan is: " + pingSpan)
         }
     }
 
     updatePingText(playerId, medianPing) {
         let pingMedian = isNaN(medianPing) ? "--" : medianPing
-        let el = document.getElementById("pingText_"+playerId)
-        if ( el )
-            el.innerHTML = '<i id="pingText_"'+playerId+'>' + pingMedian + 'ms</i>'
+        let el = document.getElementById("pingText_" + playerId)
+        if (el)
+            el.innerHTML = '<i id="pingText_"' + playerId + '>' + pingMedian + 'ms</i>'
         else
             this.makePingSpan()
     }
