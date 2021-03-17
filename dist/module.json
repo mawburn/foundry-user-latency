@@ -2,7 +2,7 @@
 	"name": "response-times",
 	"title": "Response Times",
 	"description": "Server http response time display in player list for user/client",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"author": "tenuki#5050",
 	"authors": [
 		{
@@ -28,7 +28,7 @@
 	"compatibleCoreVersion": "0.7.9",
 	"url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times",
 	"manifest": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/master/dist/module.json",
-	"download": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/v1.0.1/package/response-times-v1.0.1.zip",
+	"download": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/v1.0.2/package/response-times-v1.0.2.zip",
 	"license": "",
 	"readme": "",
 	"bugs": "",
