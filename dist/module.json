@@ -2,13 +2,13 @@
 	"name": "response-times",
 	"title": "Response Times",
 	"description": "Server http response time display in player list for user/client",
-	"version": "1.0.2",
-	"author": "tenuki#5050",
+	"version": "2.0.0",
+	"author": "mawburn7@gmail.com",
 	"authors": [
 		{
-			"name": "",
-			"email": "",
-			"url": ""
+			"name": "hypnoCode",
+			"email": "mawburn7@gmail.com",
+			"url": "mawburn.com"
 		}
 	],
 	"scripts": [
@@ -24,11 +24,11 @@
 	"packs": [],
 	"languages": [],
 	"socket": true,
-	"minimumCoreVersion": "0.6.4",
-	"compatibleCoreVersion": "0.7.9",
-	"url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times",
-	"manifest": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/master/dist/module.json",
-	"download": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times/-/raw/v1.0.2/package/response-times-v1.0.2.zip",
+	"minimumCoreVersion": "0.8.8",
+	"compatibleCoreVersion": "0.8.8",
+	"url": "https://github.com/mawburn/foundry-response-times",
+	"manifest": "",
+	"download": "",
 	"license": "",
 	"readme": "",
 	"bugs": "",
