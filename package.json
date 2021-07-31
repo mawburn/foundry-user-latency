@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "response-times",
-	"version": "1.0.2",
+	"version": "2.0.1",
 	"description": "Puts server response times in the player list.",
 	"scripts": {
 		"package": "gulp package",
@@ -11,8 +11,8 @@
 		"link": "gulp link",
 		"publish": "gulp publish"
 	},
-	"author": "",
-	"license": "",
+	"author": "mawburn <mawburn7@gmail.com>",
+	"license": "GNU AGPLv3",
 	"devDependencies": {
 		"archiver": "^4.0.1",
 		"chalk": "^4.0.0",
