@@ -66,7 +66,7 @@ const tsConfig = ts.createProject('tsconfig.json', {
 const buildTS = () => gulp.src('src/**/*.ts').pipe(tsConfig()).pipe(gulp.dest('dist'))
 
 async function copyFiles() {
-  const statics = ['module.json']
+  const statics = ['module.json', 'ping-logger.css']
 
   try {
     for (const file of statics) {

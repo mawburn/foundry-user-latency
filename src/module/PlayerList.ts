@@ -12,12 +12,8 @@ export class PlayerList {
   private playerPingTimes: PingTimes = {}
 
   registerListeners = () => {
-    console.log(!!(game as Game).socket)
-    if (!!(game as Game).socket) {
-      console.log('socket registered', `module.${MODULE_NAME}`)
+    if ((game as Game).socket) {
       ;(game as Game).socket?.on(`module.${MODULE_NAME}`, (data: Pong) => {
-        console.log('data', data, this.playerPingTimes)
-
         this.playerPingTimes[data.userId] = {
           userName: data.userName,
           ping: data.average,
@@ -26,17 +22,24 @@ export class PlayerList {
         this.updatePingText(data.userId)
       })
     } else {
-      console.log('timeout')
+      console.error('Socket init timeout')
       setTimeout(() => {
         this.registerListeners()
       }, 5000)
     }
   }
 
+  updateSelf = (data: Pong) => {
+    this.playerPingTimes[data.userId] = {
+      userName: data.userName,
+      ping: data.average,
+    }
+
+    this.updatePingText(data.userId)
+  }
+
   updatePingText = async (playerId: string) => {
-    console.log(playerId)
     const player = this.playerPingTimes[playerId]
-    console.log(player)
 
     if (!player) {
       return
@@ -53,8 +56,6 @@ export class PlayerList {
         throw new Error(err)
       }
     }
-
-    console.log(elm)
 
     elm.innerText = `${player.ping}ms`
     elm.className = 'pingSpan'

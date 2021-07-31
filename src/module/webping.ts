@@ -1,4 +1,5 @@
 import { MODULE_NAME } from '../ping-logger'
+import { PlayerList } from './PlayerList'
 
 export interface Pong {
   userId: string
@@ -9,6 +10,12 @@ export class WebPing {
   private HISTORY_SIZE: number = 30 as const
   private url: string = window.location.href
   private pingArr: number[] = []
+  private playerList: PlayerList
+
+  constructor() {
+    this.playerList = new PlayerList()
+    this.playerList.registerListeners()
+  }
 
   sleep = () =>
     new Promise<void>(res => {
@@ -57,11 +64,14 @@ export class WebPing {
   }
 
   pong(userName, userId, average) {
-    console.log('pong', userName, userId, average)
-    ;(game as Game)?.socket?.emit(`module.${MODULE_NAME}`, {
+    const pong: Pong = {
       userId,
       userName,
       average,
-    } as Pong)
+    }
+
+    ;(game as Game)?.socket?.emit(`module.${MODULE_NAME}`, { ...pong })
+
+    this.playerList.updateSelf({ ...pong })
   }
 }
