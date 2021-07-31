@@ -1,8 +1,8 @@
 {
 	"private": true,
-	"name": "response-times",
-	"version": "2.0.9",
-	"description": "Puts server response times in the player list.",
+	"name": "ping-logger",
+	"version": "1.0.0",
+	"description": "Display average ping in user list.",
 	"scripts": {
 		"build": "rm -rf dist && rm -rf package && gulp build",
 		"package": "yarn build && gulp package",
@@ -35,8 +35,5 @@
 		"sass": "^1.37.0",
 		"typescript": "^4.3.5",
 		"yargs": "^15.3.1"
-	},
-	"dependencies": {
-		"chart.js": "^3.5.0"
 	}
 }

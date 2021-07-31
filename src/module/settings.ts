@@ -1,16 +1,9 @@
+import { MODULE_NAME } from '../ping-logger'
+
 export const registerSettings = function () {
-  // Register any custom module settings here
-  ;(game as Game).settings.register('response-times', 'pingInterval', {
-    name: 'Response Check Interval (seconds)',
-    hint: 'Time in seconds between response time testing.  Best to set it over 5!',
-    type: Number,
-    default: 20,
-    scope: 'world',
-    config: true,
-  })
-  ;(game as Game).settings.register('response-times', 'historySize', {
-    name: 'History Size ( sliding window for average ) - ie last x samples',
-    hint: 'The number of samples to average over, also the fixed buffer size.',
+  ;(game as Game).settings.register(MODULE_NAME, 'pingInterval', {
+    name: 'Response Check Interval in Seconds',
+    hint: 'Time in seconds between response time testing. Best to set it over 10!',
     type: Number,
     default: 30,
     scope: 'world',

@@ -1,15 +1,10 @@
 {
-	"name": "response-times",
-	"title": "Response Times v2",
-	"description": "Server http response time display in player list for user/client",
-	"version": "2.0.9",
+	"name": "ping-logger",
+	"title": "Ping Logger",
+	"description": "Display average ping in user list.",
+	"version": "1.0.0",
 	"author": "hypnoCode",
 	"authors": [
-		{
-			"name": "tenuki#5050",
-			"email": "",
-			"url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times"
-		},
 		{
 			"name": "hypnoCode",
 			"email": "mawburn7@gmail.com",
@@ -18,10 +13,10 @@
 	],
 	"scripts": [],
 	"esmodules": [
-		"foundry-ping-times.js"
+		"ping-logger.js"
 	],
 	"styles": [
-		"foundry-ping-times.css"
+		"ping-logger.css"
 	],
 	"packs": [],
 	"languages": [],
