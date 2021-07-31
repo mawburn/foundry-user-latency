@@ -61,6 +61,7 @@ export class WebPing {
   }
 
   pong(userName, userId, average) {
+    console.log('pong', userName, userId, average)
     this._game?.socket?.emit(`module.${MODULE_NAME}`, {
       userId,
       userName,

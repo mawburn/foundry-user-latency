@@ -24,6 +24,8 @@ export default class PlayerList {
           ping: data.average,
         }
 
+        console.log(data)
+
         this.updatePingText(data.userId)
       })
     } else {
@@ -34,6 +36,7 @@ export default class PlayerList {
   }
 
   updatePingText = async (playerId: string) => {
+    console.log(playerId)
     const player = this.playerPingTimes[playerId]
 
     if (!player) {
