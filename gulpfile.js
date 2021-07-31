@@ -219,7 +219,7 @@ async function packageBuild() {
       // Ensure there is a directory to hold all the packaged versions
       fs.ensureDirSync('package')
       // Initialize the zip file
-      const zipName = `${manifest.file.name}-v${manifest.file.version}.zip`
+      const zipName = 'package.zip'
       const zipFile = fs.createWriteStream(path.join('package', zipName))
       const zip = archiver('zip', { zlib: { level: 9 } })
       zipFile.on('close', () => {
