@@ -15,6 +15,7 @@
 			"url": "mawburn.com"
 		}
 	],
+	"scripts": [],
 	"esmodules": [
 		"foundry-ping-times.js"
 	],
@@ -31,6 +32,6 @@
 	"download": "https://github.com/mawburn/foundry-response-times/releases/download/v2.0.5/package.zip",
 	"license": "GNU AGPLv3",
 	"readme": "https://github.com/mawburn/foundry-response-times/blob/main/README.md",
-	"bugs": "",
-	"changelog": "https://github.com/mawburn/foundry-response-times/issues"
+	"bugs": "https://github.com/mawburn/foundry-response-times/issues",
+	"changelog": ""
 }
