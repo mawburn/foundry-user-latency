@@ -10,18 +10,6 @@ jobs:
         uses: 'actions/checkout@v2'
         with:
           ref: ${{ github.ref }}
-      - name: 'Update Version'
-        uses: pocket-apps/action-update-version@v1
-        with:
-          files: 'package.json'
-          version-regexp: '\d+.\d+.\d+'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'Update package.json version'
-          branch-name: 'main'
-      - name: 'Checkout source code'
-        uses: 'actions/checkout@v2'
-        with:
-          ref: ${{ github.ref }}
       - name: 'Run Package'
         run: 'yarn && yarn package'
       - name: 'Get Zip'
