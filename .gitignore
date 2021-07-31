@@ -4,3 +4,4 @@ foundryconfig.json
 .DS_Store
 yarn-error.log
 package
+dist

@@ -1,21 +1,28 @@
 {
 	"private": true,
 	"name": "response-times",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "Puts server response times in the player list.",
 	"scripts": {
-		"package": "gulp package",
-		"build": "gulp build && gulp link",
+		"build": "gulp build",
+		"package": "yarn build && gulp package",
 		"build:watch": "gulp watch",
-		"clean": "gulp clean && gulp link --clean",
-		"link": "gulp link",
-		"publish": "gulp publish"
+		"clean": "gulp clean",
+		"publish": "gulp publish",
+		"lint:fix": "eslint --fix --ext .js --ignore-pattern '/node_modules/' ."
 	},
 	"author": "mawburn <mawburn7@gmail.com>",
 	"license": "GNU AGPLv3",
 	"devDependencies": {
+		"@league-of-foundry-developers/foundry-vtt-types": "^0.8.8-8",
+		"@typescript-eslint/eslint-plugin": "^4.28.5",
+		"@typescript-eslint/parser": "^4.28.5",
 		"archiver": "^4.0.1",
 		"chalk": "^4.0.0",
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-import": "^2.23.4",
+		"eslint-plugin-prettier": "^3.4.0",
 		"fs-extra": "^9.0.0",
 		"gulp": "^4.0.2",
 		"gulp-git": "^2.10.1",
@@ -23,9 +30,13 @@
 		"gulp-sass": "^4.1.0",
 		"gulp-typescript": "^6.0.0-alpha.1",
 		"json-stringify-pretty-compact": "^2.0.0",
-		"sass": "^1.26.7",
-		"typescript": "^3.9.3",
+		"prettier": "^2.3.2",
+		"prettier-eslint": "^13.0.0",
+		"sass": "^1.37.0",
+		"typescript": "^4.3.5",
 		"yargs": "^15.3.1"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"chart.js": "^3.5.0"
+	}
 }

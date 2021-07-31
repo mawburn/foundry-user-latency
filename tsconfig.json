@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "importsNotUsedAsValues": "remove",
+    "inlineSourceMap": false,
+    "lib": ["DOM", "ES6", "ES2020"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "target": "ES2020",
+    "strict": true,
+    "noImplicitAny": false,
+    "types": ["@league-of-foundry-developers/foundry-vtt-types"]
+  },
+  "exclude": ["node_modules/*"]
+}

@@ -2,7 +2,7 @@
 	"name": "response-times",
 	"title": "Response Times v2",
 	"description": "Server http response time display in player list for user/client",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"authors": [
 		{
 			"name": "tenuki#5050",
@@ -14,9 +14,6 @@
 			"email": "mawburn7@gmail.com",
 			"url": "mawburn.com"
 		}
-	],
-	"scripts": [
-		"lib/Chart.bundle.js"
 	],
 	"esmodules": [
 		"foundry-ping-times.js"

@@ -1,0 +1,25 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "extends": ["prettier"],
+  "plugins": ["prettier", "import"],
+  "rules": {
+    "arrow-body-style": ["error", "as-needed"],
+    "eqeqeq": ["error", "always"],
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-unexpected-multiline": "error",
+    "prefer-const": "error",
+    "prettier/prettier": "error",
+    "no-var": "error"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "import/extensions": [".js"]
+  },
+  "ignorePatterns": ["node_modules", "dist"]
+}
