@@ -9,7 +9,6 @@ export class WebPing {
   private HISTORY_SIZE: number = 30 as const
   private url: string = window.location.href
   private pingArr: number[] = []
-  private _game = game as Game
 
   sleep = () =>
     new Promise<void>(res => {
@@ -20,7 +19,8 @@ export class WebPing {
       }, interval)
     })
 
-  getTimeout = () => 1000 * (this._game.settings.get(MODULE_NAME, 'pingInterval') as number) ?? 30
+  getTimeout = () =>
+    1000 * ((game as Game).settings.get(MODULE_NAME, 'pingInterval') as number) ?? 30
 
   doPings = async () => {
     await this.ping()
@@ -50,7 +50,7 @@ export class WebPing {
 
       const delta = new Date().getTime() - startTime
       this.pingArr.push(delta)
-      this.pong(this._game.user?.name, this._game.user?.id, this.average())
+      this.pong((game as Game).user?.name, (game as Game).user?.id, this.average())
     } catch (err) {
       console.log(err)
     }
@@ -58,7 +58,7 @@ export class WebPing {
 
   pong(userName, userId, average) {
     console.log('pong', userName, userId, average)
-    this._game?.socket?.emit(`module.${MODULE_NAME}`, {
+    ;(game as Game)?.socket?.emit(`module.${MODULE_NAME}`, {
       userId,
       userName,
       average,

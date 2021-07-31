@@ -10,12 +10,12 @@ interface PingTimes {
 
 export class PlayerList {
   private playerPingTimes: PingTimes = {}
-  private _game = game as Game
 
   registerListeners = () => {
-    if (this._game.socket) {
-      console.log('socket registered')
-      this._game.socket.on(`module.${MODULE_NAME}`, (data: Pong) => {
+    console.log(!!(game as Game).socket)
+    if ((game as Game).socket) {
+      console.log('socket registered', `module.${MODULE_NAME}`)
+      ;(game as Game).socket?.on(`module.${MODULE_NAME}`, (data: Pong) => {
         console.log('data', data, this.playerPingTimes)
 
         this.playerPingTimes[data.userId] = {
