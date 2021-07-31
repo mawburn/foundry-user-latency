@@ -40,11 +40,12 @@ export default class PlayerList {
       return
     }
 
-    const elm = document.getElementById(`pingText_${playerId}`) as HTMLSpanElement
+    let elm = document.getElementById(`pingText_${playerId}`) as HTMLSpanElement
 
     if (!elm) {
       try {
         await this.makePingSpan(playerId)
+        elm = document.getElementById(`pingText_${playerId}`) as HTMLSpanElement
       } catch (err) {
         console.error(err)
         throw new Error(err)
@@ -62,6 +63,8 @@ export default class PlayerList {
   makePingSpan = playerId =>
     new Promise<void>((res, rej) => {
       const players = document.getElementById('players')
+
+      console.log('players', playerId, players)
 
       if (players) {
         const span = document.createElement('span')
