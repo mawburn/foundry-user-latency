@@ -126,30 +126,27 @@ export class ChartResponse {
       ((game as Game).settings.get('response-times', 'pingInterval') as number) || 20
     const historySize =
       ((game as Game).settings.get('response-times', 'historySize') as number) || 30
+
     if (this.responseTimesChart !== null) {
-      logger.log(Logger.LOG_LVL.DEBUG, 'updating chart')
-      if (this.responseTimesChart.data.datasets[0].data.length >= historySize) {
-        // honor sliding window and don't grow forever
-        this.responseTimesChart.data.datasets[0].data.shift()
-        this.responseTimesChart.data.datasets[1].data.shift()
-        //responseTimesChart.data.labels.shift()
-      }
-      this.responseTimesChart.data.datasets[0].data.push(singlePing) // TODO: implement fixed length queue here too and then stop storing data
-      this.responseTimesChart.data.datasets[1].data.push(newMedian)
-      if (this.responseTimesChart.data.datasets[0].data.length < historySize)
-        // now it's populated with 20-whatever, stop unshifting
-        this.responseTimesChart.data.labels.unshift(
-          this.responseTimesChart.data.labels[0] - pingInterval
-        )
-      this.responseTimesChart.update({ duration: 0 })
-    } else {
       this.responseTimesChart = this.makeChart(document.getElementById('pingChart'), pingData)
-      logger.log(
-        Logger.LOG_LVL.DEBUG,
-        'got a request to add to a chart that does not exist, creating it'
-      )
-      this.updateChart(pingData, singlePing, newMedian) // hmnnn, recursion in a crap language like javascript worries me...
     }
+
+    logger.log(Logger.LOG_LVL.DEBUG, 'updating chart')
+    if (this.responseTimesChart.data.datasets[0].data.length >= historySize) {
+      // honor sliding window and don't grow forever
+      this.responseTimesChart.data.datasets[0].data.shift()
+      this.responseTimesChart.data.datasets[1].data.shift()
+      //responseTimesChart.data.labels.shift()
+    }
+    this.responseTimesChart.data.datasets[0].data.push(singlePing) // TODO: implement fixed length queue here too and then stop storing data
+    this.responseTimesChart.data.datasets[1].data.push(newMedian)
+    if (this.responseTimesChart.data.datasets[0].data.length < historySize)
+      // now it's populated with 20-whatever, stop unshifting
+      this.responseTimesChart.data.labels.unshift(
+        this.responseTimesChart.data.labels[0] - pingInterval
+      )
+    this.responseTimesChart.update({ duration: 0 })
+
     this.updatePingText((game as Game)?.user?.id, newMedian)
   }
 
