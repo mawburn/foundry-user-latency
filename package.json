@@ -1,11 +1,11 @@
 {
 	"private": true,
 	"name": "ping-logger",
-	"version": "1.1.9",
+	"version": "1.0.0",
 	"description": "Display average ping in user list.",
 	"scripts": {
 		"clean": "rimraf dist package.zip",
-		"prebuild": "yarn clean",
+		"prebuild": "yarn clean && yarn version --patch",
 		"build": "gulp build",
 		"prepackage": "yarn build",
 		"package": "gulp package",
