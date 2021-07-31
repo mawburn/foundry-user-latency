@@ -13,7 +13,7 @@ export class PlayerList {
 
   registerListeners = () => {
     console.log(!!(game as Game).socket)
-    if ((game as Game).socket) {
+    if (!!(game as Game).socket) {
       console.log('socket registered', `module.${MODULE_NAME}`)
       ;(game as Game).socket?.on(`module.${MODULE_NAME}`, (data: Pong) => {
         console.log('data', data, this.playerPingTimes)
