@@ -15,6 +15,7 @@ Hooks.once('init', async function () {
 Hooks.once('ready', function () {
   console.log(`${REG_NAME} | Is Ready`)
 
+  const pl = new PlayerList()
   const webPing = new WebPing()
   webPing.doPings()
 })

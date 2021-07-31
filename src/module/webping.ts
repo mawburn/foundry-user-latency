@@ -11,10 +11,6 @@ export class WebPing {
   private pingArr: number[] = []
   private _game = game as Game
 
-  constructor() {
-    new PlayerList()
-  }
-
   sleep = () =>
     new Promise<void>(res => {
       const interval = this.getTimeout()
