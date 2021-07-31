@@ -23,7 +23,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
       - name: 'Run Package'
-        run: 'yarn package'
+        run: 'yarn && yarn package'
       - name: 'Get Zip'
         run: cat package.zip
       - name: 'Add Release'
