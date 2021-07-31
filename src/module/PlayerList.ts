@@ -69,8 +69,6 @@ export class PlayerList {
     new Promise<void>((res, rej) => {
       const players = document.getElementById('players')
 
-      console.log('players', playerId, players, this.playerPingTimes)
-
       if (players) {
         const span = document.createElement('span')
         span.id = `pingText_${playerId}`
