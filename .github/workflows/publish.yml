@@ -18,3 +18,16 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'Update package.json version'
           branch-name: 'main'
+      - name: 'Checkout source code'
+        uses: 'actions/checkout@v2'
+        with:
+          ref: ${{ github.ref }}
+      - name: 'Run Package'
+        run: 'yarn package'
+      - name: 'Get Zip'
+        run: cat package.zip
+      - name: 'Add Release'
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: package.zip
