@@ -2,7 +2,7 @@
 	"name": "response-times",
 	"title": "Response Times v2",
 	"description": "Server http response time display in player list for user/client",
-	"version": "2.0.3",
+	"version": "2.0.4",
 	"authors": [
 		{
 			"name": "tenuki#5050",
@@ -19,8 +19,7 @@
 		"foundry-ping-times.js"
 	],
 	"styles": [
-		"foundry-ping-times.css",
-		"lib/Chart.css"
+		"foundry-ping-times.css"
 	],
 	"packs": [],
 	"languages": [],
@@ -29,7 +28,7 @@
 	"compatibleCoreVersion": "0.8.8",
 	"url": "https://github.com/mawburn/foundry-response-times",
 	"manifest": "https://raw.githubusercontent.com/mawburn/foundry-response-times/main/src/module.json",
-	"download": "https://github.com/mawburn/foundry-response-times/releases/download/2.0.3/package.zip",
+	"download": "https://github.com/mawburn/foundry-response-times/releases/download/2.0.4/package.zip",
 	"license": "GNU AGPLv3",
 	"readme": "https://github.com/mawburn/foundry-response-times/blob/main/README.md",
 	"bugs": "",
