@@ -1,3 +1,19 @@
-span.shadow:hover {
-  text-shadow: 2px 2px 12px #ff0000;
+.pingSpan {
+  flex: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: rgb(0, 0, 0, 0.4);
+  border-radius: 50%;
+}
+
+.pingGood {
+  background-color: green;
+}
+
+.pingLow {
+  background-color: yellow;
+}
+
+.pingBad {
+  background-color: red;
 }

@@ -1,24 +1,30 @@
 import { MODULE_NAME } from '../ping-logger'
 
+export interface Pong {
+  userId: string
+  userName: string
+  average: number
+}
 export class WebPing {
   private HISTORY_SIZE: number = 30 as const
-  url: string = window.location.href
-  pingArr: number[] = []
-  intervalObj: NodeJS.Timer | undefined
-  interval: number = 30
+  private url: string = window.location.href
+  private pingArr: number[] = []
+  private _game = game as Game
+
+  constructor() {
+    new PlayerList()
+  }
 
   sleep = () =>
     new Promise<void>(res => {
-      this.getTimeout()
+      const interval = this.getTimeout()
 
       setTimeout(() => {
         res()
-      }, this.interval)
+      }, interval)
     })
 
-  getTimeout = () => {
-    this.interval = 1000 * ((game as Game).settings.get(MODULE_NAME, 'pingInterval') as number)
-  }
+  getTimeout = () => 1000 * (this._game.settings.get(MODULE_NAME, 'pingInterval') as number) ?? 30
 
   doPings = async () => {
     await this.ping()
@@ -53,14 +59,14 @@ export class WebPing {
     }
 
     this.pingArr.push(delta)
-    this.pong((game as Game)?.user?.name, (game as Game)?.user?.id, this.average())
+    this.pong(this._game.user?.name, this._game.user?.id, this.average())
   }
 
   pong(userName, userId, average) {
-    ;(game as Game)?.socket?.emit(`module.${MODULE_NAME}`, {
+    this._game?.socket?.emit(`module.${MODULE_NAME}`, {
       userId,
       userName,
       average,
-    })
+    } as Pong)
   }
 }

@@ -1,5 +1,5 @@
-import { registerSettings } from './module/settings';
-import { WebPing } from './module/Webping';
+import { registerSettings } from './module/settings'
+import { WebPing } from './module/Webping'
 
 export const REG_NAME = 'Ping Logger' as const
 export const MODULE_NAME = REG_NAME.toLowerCase().replace(' ', '-')

@@ -9,6 +9,11 @@
 			"name": "hypnoCode",
 			"email": "mawburn7@gmail.com",
 			"url": "mawburn.com"
+		},
+		{
+			"name": "tenuki",
+			"email": "",
+			"url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times"
 		}
 	],
 	"scripts": [],
