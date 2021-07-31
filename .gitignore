@@ -1,7 +1,6 @@
 .idea
 node_modules
-foundryconfig.json
 .DS_Store
 yarn-error.log
-package
+package.zip
 dist

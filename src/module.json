@@ -1,38 +1,38 @@
 {
-	"name": "ping-logger",
-	"title": "Ping Logger",
-	"description": "Display average ping in user list.",
-	"version": "1.0.0",
-	"author": "hypnoCode",
-	"authors": [
-		{
-			"name": "hypnoCode",
-			"email": "mawburn7@gmail.com",
-			"url": "mawburn.com"
-		},
-		{
-			"name": "tenuki",
-			"email": "",
-			"url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times"
-		}
-	],
-	"scripts": [],
-	"esmodules": [
-		"ping-logger.js"
-	],
-	"styles": [
-		"ping-logger.css"
-	],
-	"packs": [],
-	"languages": [],
-	"socket": true,
-	"minimumCoreVersion": "0.8.8",
-	"compatibleCoreVersion": "0.8.8",
-	"url": "https://github.com/mawburn/foundry-response-times",
-	"manifest": "https://raw.githubusercontent.com/mawburn/foundry-response-times/main/src/module.json",
-	"download": "https://github.com/mawburn/foundry-response-times/releases/download/v1.0.0/package.zip",
-	"license": "GNU AGPLv3",
-	"readme": "https://github.com/mawburn/foundry-response-times/blob/main/README.md",
-	"bugs": "https://github.com/mawburn/foundry-response-times/issues",
-	"changelog": ""
+  "name": "ping-logger",
+  "title": "Ping Logger",
+  "description": "Display average ping in user list.",
+  "version": "1.0.1",
+  "author": "hypnoCode",
+  "authors": [
+    {
+      "name": "hypnoCode",
+      "email": "mawburn7@gmail.com",
+      "url": "mawburn.com"
+    },
+    {
+      "name": "tenuki",
+      "email": "",
+      "url": "https://gitlab.com/tenuki.igo/foundryvtt-ping-times"
+    }
+  ],
+  "scripts": [],
+  "esmodules": [
+    "ping-logger.js"
+  ],
+  "styles": [
+    "ping-logger.css"
+  ],
+  "packs": [],
+  "languages": [],
+  "socket": true,
+  "minimumCoreVersion": "0.8.8",
+  "compatibleCoreVersion": "0.8.8",
+  "url": "https://github.com/mawburn/foundry-ping-logger",
+  "manifest": "https://raw.githubusercontent.com/mawburn/foundry-ping-logger/main/src/module.json",
+  "download": "https://github.com/mawburn/foundry-ping-logger/releases/download/v1.0.1/package.zip",
+  "license": "GNU AGPLv3",
+  "readme": "https://github.com/mawburn/foundry-ping-logger/blob/main/README.md",
+  "bugs": "https://github.com/mawburn/foundry-ping-logger/issues",
+  "changelog": "https://github.com/mawburn/foundry-ping-logger/releases"
 }

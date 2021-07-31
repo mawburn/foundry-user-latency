@@ -44,7 +44,6 @@ export class WebPing {
 
   ping = async () => {
     const startTime = new Date().getTime()
-    let delta = 0
 
     try {
       await fetch(this.url).then(res => {
@@ -53,13 +52,12 @@ export class WebPing {
         }
       })
 
-      delta = new Date().getTime() - startTime
+      const delta = new Date().getTime() - startTime
+      this.pingArr.push(delta)
+      this.pong(this._game.user?.name, this._game.user?.id, this.average())
     } catch (err) {
       console.log(err)
     }
-
-    this.pingArr.push(delta)
-    this.pong(this._game.user?.name, this._game.user?.id, this.average())
   }
 
   pong(userName, userId, average) {

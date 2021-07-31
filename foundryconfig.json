@@ -1,0 +1,9 @@
+{
+  "url": "https://github.com/mawburn/foundry-ping-logger",
+  "manifest": "https://raw.githubusercontent.com/mawburn/foundry-ping-logger/main/src/module.json",
+  "downloadURL": "https://github.com/mawburn/foundry-ping-logger/releases/download",
+  "readme": "https://github.com/mawburn/foundry-ping-logger/blob/main/README.md",
+  "bugs": "https://github.com/mawburn/foundry-ping-logger/issues",
+  "changelog": "https://github.com/mawburn/foundry-ping-logger/releases",
+  "compatibleCoreVersion": "0.8.8"
+}
