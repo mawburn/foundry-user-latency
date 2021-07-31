@@ -9,7 +9,7 @@ export class ChartResponse {
   playerPingTimes: object
 
   constructor() {
-    this.responseTimesChart = null
+    this.responseTimesChart = this.makeChart(document.getElementById('pingChart'))
     this.playerPingTimes = {}
   }
 
@@ -127,10 +127,6 @@ export class ChartResponse {
     const historySize =
       ((game as Game).settings.get('response-times', 'historySize') as number) || 30
 
-    if (this.responseTimesChart !== null) {
-      this.responseTimesChart = this.makeChart(document.getElementById('pingChart'), pingData)
-    }
-
     logger.log(Logger.LOG_LVL.DEBUG, 'updating chart')
     if (this.responseTimesChart.data.datasets[0].data.length >= historySize) {
       // honor sliding window and don't grow forever
@@ -150,29 +146,21 @@ export class ChartResponse {
     this.updatePingText((game as Game)?.user?.id, newMedian)
   }
 
-  makeChart(ctx, pingData) {
-    const foo = new Array(pingData.data.length)
-    const timeInt = (game as Game).settings.get('response-times', 'pingInterval') as number
-    const bar = new Array(pingData.data.length).fill(pingData.median)
-    for (let i = 0; i < foo.length; i++) {
-      foo[i] = -((foo.length - i) * timeInt)
-    }
-
-    logger.log(Logger.LOG_LVL.DEBUG, 'doChart: pingData in doChart - ' + JSON.stringify(pingData))
+  makeChart(ctx) {
     const myChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: foo,
+        labels: [],
         datasets: [
           {
-            data: pingData.data,
+            data: [],
             label: 'response time',
             borderColor: '#d4d4d4',
             fill: false,
             spanGaps: false,
           },
           {
-            data: bar,
+            data: [],
             label: 'median',
             borderColor: 'red',
             fill: false,

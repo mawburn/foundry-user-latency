@@ -1,10 +1,10 @@
 {
 	"private": true,
 	"name": "response-times",
-	"version": "2.0.7",
+	"version": "2.0.8",
 	"description": "Puts server response times in the player list.",
 	"scripts": {
-		"build": "gulp build",
+		"build": "rm -rf dist && rm -rf package && gulp build",
 		"package": "yarn build && gulp package",
 		"build:watch": "gulp watch",
 		"clean": "gulp clean",

@@ -2,7 +2,7 @@
 	"name": "response-times",
 	"title": "Response Times v2",
 	"description": "Server http response time display in player list for user/client",
-	"version": "2.0.7",
+	"version": "2.0.8",
 	"author": "hypnoCode#4242",
 	"authors": [
 		{
@@ -30,7 +30,7 @@
 	"compatibleCoreVersion": "0.8.8",
 	"url": "https://github.com/mawburn/foundry-response-times",
 	"manifest": "https://raw.githubusercontent.com/mawburn/foundry-response-times/main/src/module.json",
-	"download": "https://github.com/mawburn/foundry-response-times/releases/download/v2.0.7/package.zip",
+	"download": "https://github.com/mawburn/foundry-response-times/releases/download/v2.0.8/package.zip",
 	"license": "GNU AGPLv3",
 	"readme": "https://github.com/mawburn/foundry-response-times/blob/main/README.md",
 	"bugs": "https://github.com/mawburn/foundry-response-times/issues",
