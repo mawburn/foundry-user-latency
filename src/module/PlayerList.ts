@@ -57,7 +57,7 @@ export class PlayerList {
       }
     }
 
-    elm.innerText = `${player.ping}ms`
+    elm.innerHTML = `${player.ping}<em>ms</em>`
     elm.className = 'pingSpan'
 
     const level = player.ping < 100 ? 'Good' : player.ping < 250 ? 'Low' : 'Bad'
