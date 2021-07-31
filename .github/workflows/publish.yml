@@ -19,10 +19,12 @@ jobs:
       - name: 'Automated Version Bump'
         id: version-bump
         uses: 'phips28/gh-action-bump-version@master'
-        with:
-          tag-prefix: 'v'
         env:
           GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+        with:
+          tag-prefix: 'v'
+          target-branch: 'main'
+          commit-message: 'CI: bumps version to {{version}} [skip ci]'
       - name: 'cat package.json'
         run: cat ./package.json
       - name: 'Output Step'
