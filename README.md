@@ -2,6 +2,10 @@
 
 Shows an average of a players pings in the player window.
 
+<p align="center">
+  <img src="https://i.imgur.com/LPD18Rc.png"  style="width:300px;height:192px;" alt="screenshot" />
+</p>
+
 Raw json file for importing into FoundryVTT:
 
 https://raw.githubusercontent.com/mawburn/foundry-ping-logger/main/src/module.json
