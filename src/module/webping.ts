@@ -1,10 +1,15 @@
-import { ChartResponse } from './chartResponse'
+import { ChartResponse } from './ChartResponse'
 import { Logger } from './log'
 
 const logger = new Logger('WebPing', Logger.LOG_LVL.DEBUG)
-const chartResponse = new ChartResponse()
 
 export class WebPing {
+  chart: ChartResponse
+
+  constructor(chart: ChartResponse) {
+    this.chart = chart
+  }
+
   doPings(url, pingInterval, historySize) {
     // TODO: set error codes and display on lable instead of ms
     // TODO: add a graph of response time history on mouseover....
@@ -96,7 +101,7 @@ export class WebPing {
         logger.log(Logger.LOG_LVL.DEBUG, 'doPings: set pingData.data to - ' + pingData.data)
         logger.log(Logger.LOG_LVL.DEBUG, 'doPings: set pingData.median to - ' + pingData.median)
         try {
-          chartResponse.updateChart(pingData, delta, pingData.median)
+          this.chart.updateChart(pingData, delta, pingData.median)
           logger.log(Logger.LOG_LVL.DEBUG, 'updated chart')
         } catch (e) {
           logger.log(Logger.LOG_LVL.ERROR, 'doPings: error updating chart ' + e)

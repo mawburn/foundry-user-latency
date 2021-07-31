@@ -9,6 +9,7 @@ export class ChartResponse {
   playerPingTimes: object
 
   constructor() {
+    console.log('init chart')
     this.responseTimesChart = this.makeChart(document.getElementById('pingChart'))
     this.playerPingTimes = {}
   }
@@ -147,6 +148,7 @@ export class ChartResponse {
   }
 
   makeChart(ctx) {
+    console.log(ctx)
     const myChart = new Chart(ctx, {
       type: 'line',
       data: {

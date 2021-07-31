@@ -1,11 +1,13 @@
-import { ChartResponse } from './module/chartResponse'
+import { ChartResponse } from './module/ChartResponse'
 import { Logger } from './module/log'
 import { registerSettings } from './module/settings'
-import { WebPing } from './module/webping'
+import { WebPing } from './module/Webping'
 
 const logger = new Logger('foundry-ping-times', Logger.LOG_LVL.DEBUG)
-const chartResponse = new ChartResponse()
-const webPing = new WebPing()
+let chartResponse: ChartResponse | null = null
+
+console.log('NEEWWWWw')
+
 /* ------------------------------------ */
 /* Initialize module					*/
 /* ------------------------------------ */
@@ -13,6 +15,7 @@ Hooks.once('init', async function () {
   logger.log(Logger.LOG_LVL.INFO, 'foundry-ping-times | Initializing foundry-ping-times')
 
   // Assign custom classes and constants here
+  chartResponse = new ChartResponse()
 
   // Register custom module settings
   registerSettings()
@@ -36,6 +39,8 @@ Hooks.once('setup', function () {
 /* When ready							*/
 /* ------------------------------------ */
 Hooks.once('ready', function () {
+  const webPing = new WebPing(chartResponse!)
+
   const interval = (game as Game).settings.get('response-times', 'pingInterval') as number
 
   // Do anything once the module is ready
@@ -57,11 +62,11 @@ Hooks.once('ready', function () {
   const historySize = (game as Game).settings.get('response-times', 'historySize') || 30
   //
 
-  chartResponse.registerListeners()
+  chartResponse?.registerListeners()
   // this sets up the periodic ping
   webPing.doPings(window.location.href, pingInterval, historySize)
   // this makes the popup with the graph
-  chartResponse.makePopup()
+  chartResponse?.makePopup()
   // register a listener on the socket
 })
 
@@ -69,5 +74,5 @@ Hooks.once('ready', function () {
 
 Hooks.on('renderPlayerList', (app, html, data) => {
   logger.log(Logger.LOG_LVL.DEBUG, 'renderPlayerList called')
-  chartResponse.makePingSpan() // TODO: unfortunately I have to create the pingspan every freakin time this gets called - considering putting the gui element someplace else..
+  chartResponse?.makePingSpan() // TODO: unfortunately I have to create the pingspan every freakin time this gets called - considering putting the gui element someplace else..
 })
