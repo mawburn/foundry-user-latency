@@ -1,3 +1,4 @@
+import { PlayerList } from './module/PlayerList'
 import { registerSettings } from './module/settings'
 import { WebPing } from './module/WebPing'
 
@@ -16,6 +17,7 @@ Hooks.once('ready', function () {
   console.log(`${REG_NAME} | Is Ready`)
 
   const pl = new PlayerList()
+  pl.registerListeners()
   const webPing = new WebPing()
   webPing.doPings()
 })

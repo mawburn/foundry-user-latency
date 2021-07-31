@@ -12,11 +12,7 @@ export class PlayerList {
   private playerPingTimes: PingTimes = {}
   private _game = game as Game
 
-  constructor() {
-    this.registerListeners()
-  }
-
-  registerListeners() {
+  registerListeners = () => {
     console.log('socket ->', !!this._game.socket)
     if (this._game.socket) {
       this._game.socket.on(`module.${MODULE_NAME}`, (data: Pong) => {
