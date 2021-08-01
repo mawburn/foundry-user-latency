@@ -13,7 +13,7 @@ export class PlayerList {
   private playerPingTimes: PingTimes = {}
 
   getId = (id: string) => `${this.cssBase}_pingText--${id}`
-  getClass = (mod?: string) => `${this.cssBase}__pingSpan${mod ? `--${mod}` : ''}`
+  getClass = (mod?: string) => `${this.cssBase}_pingSpan${mod ? `--${mod}` : ''}`
 
   registerListeners = () => {
     if ((game as Game).socket) {
