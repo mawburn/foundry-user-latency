@@ -2,10 +2,7 @@ import { MODULE_NAME } from '../constants'
 import type { Pong } from './WebPing'
 
 interface PingTimes {
-  [key: string]: {
-    userName: string
-    ping: number
-  }
+  [key: string]: number
 }
 
 export class PlayerList {
@@ -18,11 +15,7 @@ export class PlayerList {
   registerListeners = () => {
     if ((game as Game).socket) {
       ;(game as Game).socket?.on(`module.${MODULE_NAME}`, (data: Pong) => {
-        this.playerPingTimes[data.userId] = {
-          userName: data.userName,
-          ping: data.average,
-        }
-
+        this.playerPingTimes[data.userId] = data.average
         this.updatePingText(data.userId)
       })
     } else {
@@ -34,18 +27,15 @@ export class PlayerList {
   }
 
   updateSelf = (data: Pong) => {
-    this.playerPingTimes[data.userId] = {
-      userName: data.userName,
-      ping: data.average,
-    }
+    this.playerPingTimes[data.userId] = data.average
 
     this.updatePingText(data.userId)
   }
 
   updatePingText = async (playerId: string) => {
-    const player = this.playerPingTimes[playerId]
+    const playerPing = this.playerPingTimes[playerId]
 
-    if (!player) {
+    if (!playerPing) {
       return
     }
 
@@ -62,10 +52,10 @@ export class PlayerList {
       }
     }
 
-    elm.innerHTML = `${player.ping}<em>ms</em>`
+    elm.innerHTML = `${playerPing}<em>ms</em>`
     elm.className = this.getClass()
 
-    const level = player.ping < 100 ? 'good' : player.ping < 250 ? 'low' : 'bad'
+    const level = playerPing < 100 ? 'good' : playerPing < 250 ? 'low' : 'bad'
 
     elm.classList.add(this.getClass(level))
   }
@@ -77,7 +67,6 @@ export class PlayerList {
       if (players) {
         const span = document.createElement('span')
         span.id = this.getId(playerId)
-        span.title = `${this.playerPingTimes[playerId].userName}'s ping`
         span.className = this.getClass()
 
         const playerElm = players.querySelector(`li[data-user-id="${playerId}"] .player-name`)

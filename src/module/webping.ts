@@ -3,7 +3,6 @@ import { PlayerList } from './PlayerList'
 
 export interface Pong {
   userId: string
-  userName: string
   average: number
 }
 export class WebPing {
@@ -67,7 +66,6 @@ export class WebPing {
   pong(userName, userId, average) {
     const pong: Pong = {
       userId,
-      userName,
       average,
     }
 
