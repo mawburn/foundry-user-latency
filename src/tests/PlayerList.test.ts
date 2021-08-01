@@ -10,7 +10,7 @@ describe('PlayerList', () => {
   const baseGlobal = { ...global }
 
   beforeEach(() => {
-    ;(global as GameGlobal) = {
+    ;(global as unknown as GameGlobal) = {
       ...baseGlobal,
       game: {
         socket: new MockedSocket(),
