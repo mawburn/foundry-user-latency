@@ -3,8 +3,10 @@ const fs = require('fs-extra')
 const path = require('path')
 const chalk = require('chalk')
 const archiver = require('archiver')
-const typescript = require('typescript')
-const ts = require('gulp-typescript')
+const rollup = require('rollup')
+const rollupTypescript = require('@rollup/plugin-typescript')
+const { terser } = require('rollup-plugin-terser')
+const { customAlphabet, urlAlphabet } = require('nanoid')
 
 const PACKAGE_JSON_ROOT = path.join(__dirname, 'package.json')
 const CONFIG_ROOT = path.join(__dirname, 'foundryconfig.json')
@@ -14,76 +16,49 @@ const packageJson = require(PACKAGE_JSON_ROOT)
 const config = require(CONFIG_ROOT)
 const manifest = require(MANIFEST_ROOT)
 
-function createTransformer() {
-  function shouldMutateModuleSpecifier(node) {
-    if (!typescript.isImportDeclaration(node) && !typescript.isExportDeclaration(node)) return false
-    if (node.moduleSpecifier === undefined) return false
-    if (!typescript.isStringLiteral(node.moduleSpecifier)) return false
-    if (!node.moduleSpecifier.text.startsWith('./') && !node.moduleSpecifier.text.startsWith('../'))
-      return false
-    if (path.extname(node.moduleSpecifier.text) !== '') return false
-    return true
-  }
-
-  function importTransformer(context) {
-    return node => {
-      function visitor(node) {
-        if (shouldMutateModuleSpecifier(node)) {
-          if (typescript.isImportDeclaration(node)) {
-            const newModuleSpecifier = typescript.createLiteral(`${node.moduleSpecifier.text}.js`)
-            return typescript.updateImportDeclaration(
-              node,
-              node.decorators,
-              node.modifiers,
-              node.importClause,
-              newModuleSpecifier
-            )
-          } else if (typescript.isExportDeclaration(node)) {
-            const newModuleSpecifier = typescript.createLiteral(`${node.moduleSpecifier.text}.js`)
-            return typescript.updateExportDeclaration(
-              node,
-              node.decorators,
-              node.modifiers,
-              node.exportClause,
-              newModuleSpecifier
-            )
-          }
-        }
-        return typescript.visitEachChild(node, visitor, context)
-      }
-      return typescript.visitNode(node, visitor)
-    }
-  }
-  return importTransformer
-}
-
-const tsConfig = ts.createProject('tsconfig.json', {
-  getCustomTransformers: _program => ({
-    after: [createTransformer()],
-  }),
-})
-
-const buildTS = () => gulp.src('src/**/*.ts').pipe(tsConfig()).pipe(gulp.dest('dist'))
+const rand = () => Math.floor(Math.random() * (14 - 7 + 1) + 7)
+const nanoid = customAlphabet(urlAlphabet, rand())
+const id = nanoid().replace(/-_/gi, '7')
+const packageId = `logger-${id}.js`
+const cssId = `logger-${id}.css`
 
 async function copyFiles() {
-  const statics = ['module.json', 'ping-logger.css']
+  const cssFile = path.join('src', 'ping-logger.css')
 
   try {
-    for (const file of statics) {
-      if (fs.existsSync(path.join('src', file))) {
-        await fs.copy(path.join('src', file), path.join('dist', file))
-      }
+    if (fs.existsSync(MANIFEST_ROOT)) {
+      await fs.copy(MANIFEST_ROOT, path.join('dist', 'module.json'))
     }
+
+    if (fs.existsSync(cssFile)) {
+      await fs.copy(cssFile, path.join('dist', cssId))
+    }
+
     return Promise.resolve()
   } catch (err) {
     Promise.reject(err)
   }
 }
 
+const bundler = () =>
+  rollup
+    .rollup({
+      input: './src/ping-logger.ts',
+      plugins: [rollupTypescript(), terser()],
+    })
+    .then(bundle =>
+      bundle.write({
+        file: `./dist/${packageId}`,
+        format: 'umd',
+        name: 'library',
+        sourcemap: true,
+      })
+    )
+
 const packageBuild = async () =>
   new Promise((resolve, reject) => {
     try {
-      const zipFile = fs.createWriteStream(path.join(__dirname, 'package.zip'))
+      const zipFile = fs.createWriteStream(path.join(__dirname, 'module.zip'))
       const zip = archiver('zip', { zlib: { level: 9 } })
 
       zipFile.on('close', () => {
@@ -116,10 +91,12 @@ const updateManifest = cb => {
     return
   }
 
+  manifest.esmodules = [packageId]
+  manifest.styles = [cssId]
   manifest.version = packageJson.version
   manifest.url = config.url
   manifest.manifest = config.manifest
-  manifest.download = `${config.downloadURL}/v${packageJson.version}/package.zip`
+  manifest.download = `${config.downloadURL}/v${packageJson.version}/module.zip`
   manifest.readme = config.readme
   manifest.bugs = config.bugs
   manifest.changelog = config.changelog
@@ -135,5 +112,5 @@ const updateManifest = cb => {
   }
 }
 
-exports.build = gulp.series(updateManifest, buildTS, copyFiles)
+exports.build = gulp.series(updateManifest, bundler, copyFiles)
 exports.package = packageBuild

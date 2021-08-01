@@ -10,6 +10,15 @@ Raw json file for importing into FoundryVTT:
 
 https://raw.githubusercontent.com/mawburn/foundry-ping-logger/main/src/module.json
 
+## Scripts
+
+- clean - removes dist and package.zip folder
+- build - runs clean & bumps package version & gulp build & updates manifest file
+  - _Note:_ versions in the manifest file are based on the version in package.json
+- package - runs gulp build & outputs a module.zip file
+- nuke - runs clean & removes node_modules
+- lint- runs lint --fix on all files
+
 ## Fork - Response Times
 
 - https://foundryvtt.com/packages/response-time

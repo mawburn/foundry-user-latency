@@ -14,10 +14,13 @@ export class PlayerList {
   registerListeners = () => {
     if ((game as Game).socket) {
       ;(game as Game).socket?.on(`module.${MODULE_NAME}`, (data: Pong) => {
+        console.log('--->', data)
         this.playerPingTimes[data.userId] = {
           userName: data.userName,
           ping: data.average,
         }
+
+        console.log('x')
 
         this.updatePingText(data.userId)
       })
