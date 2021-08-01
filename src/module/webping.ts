@@ -45,25 +45,19 @@ export class WebPing {
   }
 
   ping = async () => {
-    const startTime = new Date().getTime()
-
     try {
-      const delta = await fetch(this.url, { method: 'HEAD' }).then(res => {
-        if (!res.ok) {
-          throw new Error('Bad response from server')
-        }
-
-        return new Date().getTime() - startTime
-      })
+      const startTime = Date.now()
+      await fetch(this.url, { method: 'HEAD' })
+      const delta = Date.now() - startTime
 
       this.pingArr.push(delta)
-      this.pong((game as Game).user?.name, (game as Game).user?.id, this.average())
+      this.pong((game as Game).user?.id, this.average())
     } catch (err) {
       console.log(err)
     }
   }
 
-  pong(userName, userId, average) {
+  pong(userId, average) {
     const pong: Pong = {
       userId,
       average,
