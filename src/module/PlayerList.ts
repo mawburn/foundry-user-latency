@@ -1,5 +1,5 @@
-import { MODULE_NAME } from '../ping-logger'
-import { Pong } from './WebPing'
+import { MODULE_NAME } from '../constants'
+import type { Pong } from './WebPing'
 
 interface PingTimes {
   [key: string]: {

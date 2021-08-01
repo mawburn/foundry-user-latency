@@ -1,4 +1,4 @@
-import { MODULE_NAME } from '../ping-logger'
+import { MODULE_NAME } from '../constants'
 
 export const registerSettings = function () {
   ;(game as Game).settings.register(MODULE_NAME, 'pingInterval', {

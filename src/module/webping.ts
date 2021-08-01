@@ -1,4 +1,4 @@
-import { MODULE_NAME } from '../ping-logger'
+import { MODULE_NAME } from '../constants'
 import { PlayerList } from './PlayerList'
 
 export interface Pong {

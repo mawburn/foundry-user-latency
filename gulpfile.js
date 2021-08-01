@@ -4,6 +4,8 @@ const path = require('path')
 const chalk = require('chalk')
 const archiver = require('archiver')
 const rollup = require('rollup')
+const postcss = require('rollup-plugin-postcss')
+
 const rollupTypescript = require('@rollup/plugin-typescript')
 const { terser } = require('rollup-plugin-terser')
 const { customAlphabet, urlAlphabet } = require('nanoid')
@@ -18,33 +20,22 @@ const manifest = require(MANIFEST_ROOT)
 
 const rand = () => Math.floor(Math.random() * (14 - 7 + 1) + 7)
 const nanoid = customAlphabet(urlAlphabet, rand())
-const id = nanoid().replace(/-_/gi, '7')
+const id = nanoid().replace(/[-|_]/gi, '42')
 const packageId = `logger-${id}.js`
 const cssId = `logger-${id}.css`
-
-async function copyFiles() {
-  const cssFile = path.join('src', 'ping-logger.css')
-
-  try {
-    if (fs.existsSync(MANIFEST_ROOT)) {
-      await fs.copy(MANIFEST_ROOT, path.join('dist', 'module.json'))
-    }
-
-    if (fs.existsSync(cssFile)) {
-      await fs.copy(cssFile, path.join('dist', cssId))
-    }
-
-    return Promise.resolve()
-  } catch (err) {
-    Promise.reject(err)
-  }
-}
 
 const bundler = () =>
   rollup
     .rollup({
       input: './src/ping-logger.ts',
-      plugins: [rollupTypescript(), terser()],
+      plugins: [
+        rollupTypescript(),
+        postcss({
+          config: { minimize: true, extensions: ['.scss'] },
+          extract: path.resolve(`dist/${cssId}`),
+        }),
+        terser(),
+      ],
     })
     .then(bundle =>
       bundle.write({
@@ -106,11 +97,12 @@ const updateManifest = cb => {
     const manifestOut = JSON.stringify(manifest, null, 2)
 
     fs.writeFileSync(MANIFEST_ROOT, manifestOut, 'utf8')
+    fs.outputFileSync('./dist/module.json', manifestOut)
     return cb()
   } catch (err) {
     cb(err)
   }
 }
 
-exports.build = gulp.series(updateManifest, bundler, copyFiles)
+exports.build = gulp.series(updateManifest, bundler)
 exports.package = packageBuild
