@@ -12,8 +12,8 @@ export class PlayerList {
   private cssBase = 'pingLogger_' as const
   private playerPingTimes: PingTimes = {}
 
-  getId = (id: string) => `${this.cssBase}_pingText--${id}`
-  getClass = (mod?: string) => `${this.cssBase}_pingSpan${mod ? `--${mod}` : ''}`
+  getId = (id: string) => `${this.cssBase}pingText--${id}`
+  getClass = (mod?: string) => `${this.cssBase}pingSpan${mod ? `--${mod}` : ''}`
 
   registerListeners = () => {
     if ((game as Game).socket) {
