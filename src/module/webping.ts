@@ -49,13 +49,14 @@ export class WebPing {
     const startTime = new Date().getTime()
 
     try {
-      await fetch(this.url).then(res => {
+      const delta = await fetch(this.url, { method: 'HEAD' }).then(res => {
         if (!res.ok) {
           throw new Error('Bad response from server')
         }
+
+        return new Date().getTime() - startTime
       })
 
-      const delta = new Date().getTime() - startTime
       this.pingArr.push(delta)
       this.pong((game as Game).user?.name, (game as Game).user?.id, this.average())
     } catch (err) {
