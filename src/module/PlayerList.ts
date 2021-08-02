@@ -28,7 +28,6 @@ export class PlayerList {
 
   updateSelf = (data: Pong) => {
     this.playerPingTimes[data.userId] = data.average
-
     this.updatePingText(data.userId)
   }
 
@@ -55,7 +54,7 @@ export class PlayerList {
     elm.innerHTML = `${playerPing}<em>ms</em>`
     elm.className = this.getClass()
 
-    const level = playerPing < 100 ? 'good' : playerPing < 250 ? 'low' : 'bad'
+    const level = playerPing < 150 ? 'good' : playerPing < 250 ? 'low' : 'bad'
 
     elm.classList.add(this.getClass(level))
   }

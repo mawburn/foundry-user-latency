@@ -5,6 +5,7 @@ export interface Pong {
   userId: string
   average: number
 }
+
 export class WebPing {
   private HISTORY_SIZE: number = 30 as const
   private url: string = window.location.href
@@ -41,14 +42,14 @@ export class WebPing {
 
     const total = this.pingArr.reduce((a, b) => a + b, 0)
 
-    return Math.ceil(total / this.pingArr.length)
+    return Math.round(total / this.pingArr.length)
   }
 
   ping = async () => {
     try {
       const startTime = Date.now()
       await fetch(this.url, { method: 'HEAD' })
-      const delta = Date.now() - startTime
+      const delta = (Date.now() - startTime) * 0.98 // take off 2% for processing time
 
       this.pingArr.push(delta)
       this.pong((game as Game).user?.id, this.average())
@@ -57,7 +58,7 @@ export class WebPing {
     }
   }
 
-  pong(userId, average) {
+  pong = (userId, average) => {
     const pong: Pong = {
       userId,
       average,
