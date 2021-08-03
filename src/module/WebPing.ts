@@ -26,8 +26,12 @@ export class WebPing {
       }, interval)
     })
 
-  getTimeout = () =>
-    1000 * ((game as Game).settings.get(MODULE_NAME, 'pingInterval') as number) ?? 30
+  getTimeout = () => {
+    const setting = ((game as Game).settings.get(MODULE_NAME, 'pingInterval') as number) ?? 30
+
+    // force 10 seconds minimum
+    return 1000 * (setting >= 10 ? setting : 10)
+  }
 
   doPings = async () => {
     await this.ping()
@@ -48,8 +52,8 @@ export class WebPing {
   ping = async () => {
     try {
       const startTime = Date.now()
-      await fetch(this.url, { method: 'HEAD' })
-      const delta = (Date.now() - startTime) * 0.98 // take off 2% for processing time
+      await (game as Game).time.sync()
+      const delta = Date.now() - startTime
 
       this.pingArr.push(delta)
       this.pong((game as Game).user?.id, this.average())
