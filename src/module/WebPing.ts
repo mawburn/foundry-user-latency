@@ -7,7 +7,7 @@ export interface Pong {
 }
 
 export class WebPing {
-  private HISTORY_SIZE: number = 30 as const
+  private HISTORY_SIZE: number = 10 as const
   private pingArr: number[] = []
   private playerList: PlayerList
 

@@ -27,7 +27,7 @@ const cssId = `logger-${id}.css`
 const bundler = () =>
   rollup
     .rollup({
-      input: './src/ping-logger.ts',
+      input: './src/index.ts',
       plugins: [
         rollupTypescript(),
         postcss({
