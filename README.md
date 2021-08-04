@@ -10,6 +10,10 @@ Foundry Link:
 
 https://foundryvtt.com/packages/ping-logger
 
+Foundry Hub:
+
+https://www.foundryvtt-hub.com/package/ping-logger/
+
 ## Scripts
 
 - clean - removes dist and package.zip folder
