@@ -3,7 +3,7 @@
 Shows an average of a players pings in the player window.
 
 <p align="center">
-  <img src="https://i.imgur.com/LPD18Rc.png"  style="width:300px;height:192px;" alt="screenshot" />
+  <img src="https://i.imgur.com/bytsMWS.png" alt="FoundryVTT Ping Logger" />
 </p>
 
 Foundry Link:
