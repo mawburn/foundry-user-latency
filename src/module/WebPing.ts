@@ -8,7 +8,6 @@ export interface Pong {
 
 export class WebPing {
   private HISTORY_SIZE: number = 30 as const
-  private url: string = window.location.href
   private pingArr: number[] = []
   private playerList: PlayerList
 

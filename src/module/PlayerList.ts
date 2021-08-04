@@ -31,7 +31,7 @@ export class PlayerList {
     this.updatePingText(data.userId)
   }
 
-  updatePingText = async (playerId: string) => {
+  updatePingText = (playerId: string) => {
     const playerPing = this.playerPingTimes[playerId]
 
     if (!playerPing) {
@@ -42,41 +42,31 @@ export class PlayerList {
     let elm = document.getElementById(elmId) as HTMLSpanElement
 
     if (!elm) {
-      try {
-        await this.makePingSpan(playerId)
-        elm = document.getElementById(elmId) as HTMLSpanElement
-      } catch (err) {
-        console.error(err)
-        throw new Error(err)
-      }
+      this.makePingSpan(playerId)
+      elm = document.getElementById(elmId) as HTMLSpanElement
     }
 
     elm.innerHTML = `${playerPing}<em>ms</em>`
     elm.className = this.getClass()
 
-    const level = playerPing < 150 ? 'good' : playerPing < 250 ? 'low' : 'bad'
+    const level = playerPing <= 100 ? 'good' : playerPing < 250 ? 'low' : 'bad'
 
     elm.classList.add(this.getClass(level))
   }
 
-  makePingSpan = playerId =>
-    new Promise<void>((res, rej) => {
-      const players = document.getElementById('players')
+  makePingSpan = playerId => {
+    const players = document.getElementById('players')
 
-      if (players) {
-        const span = document.createElement('span')
-        span.id = this.getId(playerId)
-        span.className = this.getClass()
+    if (players) {
+      const span = document.createElement('span')
+      span.id = this.getId(playerId)
+      span.className = this.getClass()
 
-        const playerElm = players.querySelector(`li[data-user-id="${playerId}"] .player-name`)
+      const playerElm = players.querySelector(`li[data-user-id="${playerId}"] .player-name`)
 
-        if (playerElm) {
-          playerElm.insertAdjacentElement('afterend', span)
-        }
-
-        res()
+      if (playerElm) {
+        playerElm.insertAdjacentElement('afterend', span)
       }
-
-      rej()
-    })
+    }
+  }
 }
