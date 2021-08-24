@@ -2,8 +2,8 @@ import { MODULE_NAME } from '../constants'
 
 export const registerSettings = () => {
   ;(game as Game).settings.register(MODULE_NAME, 'pingInterval', {
-    name: 'Ping Interval in Seconds',
-    hint: 'Time in seconds between ping requests. 10s minimum. Between 20-40 should be enough.',
+    name: `${game.i18n.localize("PINGLOGGER.Interval")}`,
+    hint: `${game.i18n.localize("PINGLOGGER.IntervalHint")}`,
     type: Number,
     // @ts-ignore
     range: {
