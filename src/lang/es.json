@@ -1,0 +1,7 @@
+{
+	"I18N.LANGUAGE": "Español",
+	"I18N.MAINTAINERS": "@Viriato139ac#0342",
+  
+	"PINGLOGGER.Interval": "Intervalo de tiempo entre pings",
+	"PINGLOGGER.IntervalHint": "Segundos entre peticiones de ping. Mínimo 10seg. Entre 20-40 suele ser suficiente"
+}
