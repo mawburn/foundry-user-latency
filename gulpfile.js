@@ -104,5 +104,15 @@ const updateManifest = cb => {
   }
 }
 
-exports.build = gulp.series(updateManifest, bundler)
+const copyLang = cb => {
+  try {
+    fs.copySync(path.join(__dirname, 'src', 'lang'), path.join(__dirname, 'dist', 'lang'))
+
+    return cb()
+  } catch (err) {
+    cb(err)
+  }
+}
+
+exports.build = gulp.series(updateManifest, copyLang, bundler)
 exports.package = packageBuild
