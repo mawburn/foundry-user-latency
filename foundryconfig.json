@@ -5,5 +5,5 @@
   "readme": "https://github.com/mawburn/foundry-ping-logger/blob/main/README.md",
   "bugs": "https://github.com/mawburn/foundry-ping-logger/issues",
   "changelog": "https://github.com/mawburn/foundry-ping-logger/releases",
-  "compatibleCoreVersion": "0.8.9"
+  "compatibleCoreVersion": "0.9.0"
 }

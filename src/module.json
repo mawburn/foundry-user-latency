@@ -2,26 +2,21 @@
   "name": "ping-logger",
   "title": "Ping Logger",
   "description": "Display average ping in user list.",
-  "version": "1.2.10",
+  "version": "1.2.14",
   "author": "hypnoCode",
   "authors": [
     {
       "name": "hypnoCode",
       "email": "mawburn7@gmail.com",
       "url": "mawburn.com"
-    },
-    {
-      "name": "tenuki",
-      "email": "",
-      "url": "https:/gitlab.com/tenuki.igo/foundryvtt-ping-times"
     }
   ],
   "scripts": [],
   "esmodules": [
-    "logger-bb2QBxcfbNp.js"
+    "logger-jXJ9A5Y5yrnD.js"
   ],
   "styles": [
-    "logger-bb2QBxcfbNp.css"
+    "logger-jXJ9A5Y5yrnD.css"
   ],
   "packs": [],
   "languages": [
@@ -38,10 +33,10 @@
   ],
   "socket": true,
   "minimumCoreVersion": "0.7.5",
-  "compatibleCoreVersion": "0.8.9",
+  "compatibleCoreVersion": "0.9.0",
   "url": "https://github.com/mawburn/foundry-ping-logger",
   "manifest": "https://raw.githubusercontent.com/mawburn/foundry-ping-logger/main/src/module.json",
-  "download": "https://github.com/mawburn/foundry-ping-logger/releases/download/v1.2.10/module.zip",
+  "download": "https://github.com/mawburn/foundry-ping-logger/releases/download/v1.2.14/module.zip",
   "license": "GNU AGPLv3",
   "readme": "https://github.com/mawburn/foundry-ping-logger/blob/main/README.md",
   "bugs": "https://github.com/mawburn/foundry-ping-logger/issues",
