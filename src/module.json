@@ -2,7 +2,7 @@
   "name": "ping-logger",
   "title": "Ping Logger",
   "description": "Display average ping in user list.",
-  "version": "1.2.17",
+  "version": "1.2.18",
   "author": "hypnoCode",
   "authors": [
     {
@@ -13,10 +13,10 @@
   ],
   "scripts": [],
   "esmodules": [
-    "logger-iEUUbmfGuop.js"
+    "logger-NUPF9EpbYJx3.js"
   ],
   "styles": [
-    "logger-iEUUbmfGuop.css"
+    "logger-NUPF9EpbYJx3.css"
   ],
   "packs": [],
   "languages": [
@@ -33,10 +33,10 @@
   ],
   "socket": true,
   "minimumCoreVersion": "0.7.5",
-  "compatibleCoreVersion": "9",
+  "compatibleCoreVersion": "10",
   "url": "https://github.com/mawburn/foundry-ping-logger",
   "manifest": "https://raw.githubusercontent.com/mawburn/foundry-ping-logger/main/src/module.json",
-  "download": "https://github.com/mawburn/foundry-ping-logger/releases/download/v1.2.17/module.zip",
+  "download": "https://github.com/mawburn/foundry-ping-logger/releases/download/v1.2.18/module.zip",
   "license": "GNU AGPLv3",
   "readme": "https://github.com/mawburn/foundry-ping-logger/blob/main/README.md",
   "bugs": "https://github.com/mawburn/foundry-ping-logger/issues",

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "ping-logger",
-  "version": "1.2.17",
+  "version": "1.2.18",
   "description": "Display average ping in user list.",
   "scripts": {
     "clean": "rimraf dist module.zip",
