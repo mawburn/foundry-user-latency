@@ -91,7 +91,7 @@ const updateManifest = cb => {
   manifest.readme = config.readme
   manifest.bugs = config.bugs
   manifest.changelog = config.changelog
-  manifest.compatibleCoreVersion = config.compatibleCoreVersion
+  manifest.compatibility = config.compatibility
 
   try {
     const manifestOut = JSON.stringify(manifest, null, 2)
