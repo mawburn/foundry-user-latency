@@ -6,9 +6,9 @@ export interface Pong {
   average: number
 }
 
-export class WebPing {
+export class WebLatency {
   private HISTORY_SIZE: number = 10 as const
-  private pingArr: number[] = []
+  private latencyArr: number[] = []
   private playerList: PlayerList
 
   constructor() {
@@ -26,35 +26,35 @@ export class WebPing {
     })
 
   getTimeout = () => {
-    const setting = ((game as Game).settings.get(MODULE_NAME, 'pingInterval') as number) ?? 30
+    const setting = ((game as Game).settings.get(MODULE_NAME, 'latencyInterval') as number) ?? 30
 
     // force 10 seconds minimum
     return 1000 * (setting >= 10 ? setting : 10)
   }
 
-  doPings = async () => {
-    await this.ping()
+  doLatencys = async () => {
+    await this.latency()
     await this.sleep()
-    this.doPings()
+    this.doLatencys()
   }
 
   average = () => {
-    while (this.pingArr.length > this.HISTORY_SIZE) {
-      this.pingArr.shift()
+    while (this.latencyArr.length > this.HISTORY_SIZE) {
+      this.latencyArr.shift()
     }
 
-    const total = this.pingArr.reduce((a, b) => a + b, 0)
+    const total = this.latencyArr.reduce((a, b) => a + b, 0)
 
-    return Math.round(total / this.pingArr.length)
+    return Math.round(total / this.latencyArr.length)
   }
 
-  ping = async () => {
+  latency = async () => {
     try {
       const startTime = Date.now()
       await (game as Game).time.sync()
       const delta = Date.now() - startTime
 
-      this.pingArr.push(delta)
+      this.latencyArr.push(delta)
       this.pong((game as Game).user?.id, this.average())
     } catch (err) {
       console.log(err)

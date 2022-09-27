@@ -1,4 +1,4 @@
 {
-	"PINGLOGGER.Interval": "Ping Interval in Seconds",
-	"PINGLOGGER.IntervalHint": "Time in seconds between ping requests. 10s minimum. Between 20-40 should be enough."
+	"USERLATENCY.Interval": "Latency Interval in Seconds",
+	"USERLATENCY.IntervalHint": "Time in seconds between latency requests. 10s minimum. Between 20-40 should be enough."
 }

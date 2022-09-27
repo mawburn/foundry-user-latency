@@ -1,7 +1,7 @@
 {
-  "name": "ping-logger",
-  "title": "Ping Logger",
-  "description": "Display average ping in user list.",
+  "name": "user-latency",
+  "title": "User Latency",
+  "description": "Display average latency for users.",
   "version": "1.2.20",
   "author": "hypnoCode",
   "authors": [
@@ -13,10 +13,10 @@
   ],
   "scripts": [],
   "esmodules": [
-    "logger-y42rkIs1QeHJ0z.js"
+    "logger-ObiSgHwLi.js"
   ],
   "styles": [
-    "logger-y42rkIs1QeHJ0z.css"
+    "logger-ObiSgHwLi.css"
   ],
   "packs": [],
   "languages": [
@@ -32,13 +32,13 @@
     }
   ],
   "socket": true,
-  "url": "https://github.com/mawburn/foundry-ping-logger",
-  "manifest": "https://raw.githubusercontent.com/mawburn/foundry-ping-logger/main/src/module.json",
-  "download": "https://github.com/mawburn/foundry-ping-logger/releases/download/v1.2.20/module.zip",
+  "url": "https://github.com/mawburn/foundry-user-latency",
+  "manifest": "https://raw.githubusercontent.com/mawburn/foundry-user-latency/main/src/module.json",
+  "download": "https://github.com/mawburn/foundry-user-latency/releases/download/v1.2.20/module.zip",
   "license": "GNU AGPLv3",
-  "readme": "https://github.com/mawburn/foundry-ping-logger/blob/main/README.md",
-  "bugs": "https://github.com/mawburn/foundry-ping-logger/issues",
-  "changelog": "https://github.com/mawburn/foundry-ping-logger/releases",
+  "readme": "https://github.com/mawburn/foundry-user-latency/blob/main/README.md",
+  "bugs": "https://github.com/mawburn/foundry-user-latency/issues",
+  "changelog": "https://github.com/mawburn/foundry-user-latency/releases",
   "compatibility": {
     "minimum": "9",
     "verified": "10"

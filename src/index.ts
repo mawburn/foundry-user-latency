@@ -1,6 +1,6 @@
 import './style.scss'
 import { registerSettings } from './module/settings'
-import { WebPing } from './module/WebPing'
+import { WebLatency } from './module/WebLatency'
 import { REG_NAME } from './constants'
 
 Hooks.once('init', async function () {
@@ -14,10 +14,10 @@ Hooks.once('init', async function () {
 Hooks.once('ready', function () {
   console.log(`${REG_NAME} | Is Ready`)
 
-  const webPing = new WebPing()
+  const webLatency = new WebLatency()
 
   // wait for things to get loaded
   setTimeout(() => {
-    webPing.doPings()
+    webLatency.doLatencys()
   }, 10000)
 })

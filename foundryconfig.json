@@ -1,10 +1,10 @@
 {
-  "url": "https://github.com/mawburn/foundry-ping-logger",
-  "manifest": "https://raw.githubusercontent.com/mawburn/foundry-ping-logger/main/src/module.json",
-  "downloadURL": "https://github.com/mawburn/foundry-ping-logger/releases/download",
-  "readme": "https://github.com/mawburn/foundry-ping-logger/blob/main/README.md",
-  "bugs": "https://github.com/mawburn/foundry-ping-logger/issues",
-  "changelog": "https://github.com/mawburn/foundry-ping-logger/releases",
+  "url": "https://github.com/mawburn/foundry-user-latency",
+  "manifest": "https://raw.githubusercontent.com/mawburn/foundry-user-latency/main/src/module.json",
+  "downloadURL": "https://github.com/mawburn/foundry-user-latency/releases/download",
+  "readme": "https://github.com/mawburn/foundry-user-latency/blob/main/README.md",
+  "bugs": "https://github.com/mawburn/foundry-user-latency/issues",
+  "changelog": "https://github.com/mawburn/foundry-user-latency/releases",
   "compatibility": {
     "minimum": "9",
     "verified": "10"

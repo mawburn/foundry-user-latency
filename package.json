@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "ping-logger",
-  "version": "1.2.18",
-  "description": "Display average ping in user list.",
+  "name": "user-latency",
+  "version": "1.2.20",
+  "description": "Display average latency in user list.",
   "scripts": {
     "clean": "rimraf dist module.zip",
     "prebuild": "yarn clean",

@@ -1,22 +1,22 @@
 import { MODULE_NAME } from '../constants'
-import type { Pong } from './WebPing'
+import type { Pong } from './WebLatency'
 
-interface PingTimes {
+interface LatencyTimes {
   [key: string]: number
 }
 
 export class PlayerList {
-  private cssBase = 'pingLogger_' as const
-  private playerPingTimes: PingTimes = {}
+  private cssBase = 'userLatency_' as const
+  private playerLatencyTimes: LatencyTimes = {}
 
-  getId = (id: string) => `${this.cssBase}pingText--${id}`
-  getClass = (mod?: string) => `${this.cssBase}pingSpan${mod ? `--${mod}` : ''}`
+  getId = (id: string) => `${this.cssBase}LatencyText--${id}`
+  getClass = (mod?: string) => `${this.cssBase}LatencySpan${mod ? `--${mod}` : ''}`
 
   registerListeners = () => {
     if ((game as Game).socket) {
       ;(game as Game).socket?.on(`module.${MODULE_NAME}`, (data: Pong) => {
-        this.playerPingTimes[data.userId] = data.average
-        this.updatePingText(data.userId)
+        this.playerLatencyTimes[data.userId] = data.average
+        this.updateLatencyText(data.userId)
       })
     } else {
       console.error('Socket init timeout')
@@ -27,14 +27,14 @@ export class PlayerList {
   }
 
   updateSelf = (data: Pong) => {
-    this.playerPingTimes[data.userId] = data.average
-    this.updatePingText(data.userId)
+    this.playerLatencyTimes[data.userId] = data.average
+    this.updateLatencyText(data.userId)
   }
 
-  updatePingText = (playerId: string) => {
-    const playerPing = this.playerPingTimes[playerId]
+  updateLatencyText = (playerId: string) => {
+    const playerLatency = this.playerLatencyTimes[playerId]
 
-    if (!playerPing) {
+    if (!playerLatency) {
       return
     }
 
@@ -42,19 +42,19 @@ export class PlayerList {
     let elm = document.getElementById(elmId) as HTMLSpanElement
 
     if (!elm) {
-      this.makePingSpan(playerId)
+      this.makeLatencySpan(playerId)
       elm = document.getElementById(elmId) as HTMLSpanElement
     }
 
-    elm.innerHTML = `${playerPing}<em>ms</em>`
+    elm.innerHTML = `${playerLatency}<em>ms</em>`
     elm.className = this.getClass()
 
-    const level = playerPing <= 100 ? 'good' : playerPing < 250 ? 'low' : 'bad'
+    const level = playerLatency <= 100 ? 'good' : playerLatency < 250 ? 'low' : 'bad'
 
     elm.classList.add(this.getClass(level))
   }
 
-  makePingSpan = playerId => {
+  makeLatencySpan = playerId => {
     const players = document.getElementById('players')
 
     if (players) {
