@@ -13,6 +13,10 @@
     font-size: 0.5rem;
   }
 
+  &--hidden {
+    display: none;
+  }
+
   &--good {
     background-color: rgba(0, 127, 0, 0.4);
   }
@@ -23,5 +27,13 @@
 
   &--bad {
     background-color: rgba(191, 0, 0, 0.4);
+  }
+
+  @media (prefers-contrast: less) {
+    &--good,
+    &--low,
+    &--bad {
+      background-color: rgba(42, 42, 42, 0.4);
+    }
   }
 }

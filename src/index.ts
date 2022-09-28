@@ -18,6 +18,6 @@ Hooks.once('ready', function () {
 
   // wait for things to get loaded
   setTimeout(() => {
-    webLatency.doLatencys()
+    webLatency.doLatencies()
   }, 10000)
 })

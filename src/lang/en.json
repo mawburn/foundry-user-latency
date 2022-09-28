@@ -1,4 +1,8 @@
 {
+	"I18N.LANGUAGE": "English",
+	"I18N.MAINTAINERS": "hypnoCode#4242",
 	"USERLATENCY.Interval": "Latency Interval in Seconds",
-	"USERLATENCY.IntervalHint": "Time in seconds between latency requests. 10s minimum. Between 20-40 should be enough."
+	"USERLATENCY.IntervalHint": "Time in seconds between latency requests. 10s minimum. Between 20-40 should be enough.",
+	"USERLATENCY.Hide": "Hide latency completely",
+	"USERLATENCY.Micro": "Show only dots instead of numbers"
 }

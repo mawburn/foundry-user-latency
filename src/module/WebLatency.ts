@@ -32,10 +32,10 @@ export class WebLatency {
     return 1000 * (setting >= 10 ? setting : 10)
   }
 
-  doLatencys = async () => {
+  doLatencies = async () => {
     await this.latency()
     await this.sleep()
-    this.doLatencys()
+    this.doLatencies()
   }
 
   average = () => {
