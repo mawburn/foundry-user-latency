@@ -1,4 +1,5 @@
 import { MODULE_NAME } from '../constants'
+
 import type { Pong } from './WebLatency'
 
 interface LatencyTimes {
@@ -33,23 +34,32 @@ export class PlayerList {
 
   updateLatencyText = (playerId: string) => {
     const playerLatency = this.playerLatencyTimes[playerId]
-
-    if (!playerLatency) {
-      return
-    }
-
+    const showLatency = (game as Game).settings.get(MODULE_NAME, 'showLatency')
     const elmId = this.getId(playerId)
     let elm = document.getElementById(elmId) as HTMLSpanElement
+
+    if (!playerLatency || !showLatency) {
+      return
+    }
 
     if (!elm) {
       this.makeLatencySpan(playerId)
       elm = document.getElementById(elmId) as HTMLSpanElement
     }
 
-    elm.innerHTML = `${playerLatency}<em>ms</em>`
-    elm.className = this.getClass()
+    const microLatency = (game as Game).settings.get(MODULE_NAME, 'microLatency')
 
     const level = playerLatency <= 100 ? 'good' : playerLatency < 250 ? 'low' : 'bad'
+
+    if (microLatency) {
+      elm.innerHTML = level === 'good' ? '+' : level === 'low' ? '-' : '&nbsp;'
+      elm.title = `${playerLatency}ms`
+      elm.classList.add('microLatency')
+    } else {
+      elm.innerHTML = `${playerLatency}<em>ms</em>`
+    }
+
+    elm.className = this.getClass()
 
     elm.classList.add(this.getClass(level))
   }

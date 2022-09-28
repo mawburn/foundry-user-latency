@@ -1,6 +1,6 @@
 {
 	"I18N.LANGUAGE": "Español",
-	"I18N.MAINTAINERS": "@Viriato139ac#0342",
+	"I18N.MAINTAINERS": "Viriato139ac#0342",
 	"USERLATENCY.Interval": "Intervalo de tiempo entre latencia",
 	"USERLATENCY.IntervalHint": "Segundos entre peticiones de latencia. Mínimo 10seg. Entre 20-40 suele ser suficiente",
 	"USERLATENCY.Hide": "Ocultar completamente la latencia",

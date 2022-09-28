@@ -15,4 +15,18 @@ export const registerSettings = () => {
     scope: 'world',
     config: true,
   })
+  ;(game as Game).settings.register(MODULE_NAME, 'showLatency', {
+    name: `${(game as any).i18n.localize('USERLATENCY.Hide')}`,
+    type: Boolean,
+    default: true,
+    scope: 'world',
+    config: true,
+  })
+  ;(game as Game).settings.register(MODULE_NAME, 'microLatency', {
+    name: `${(game as any).i18n.localize('USERLATENCY.Micro')}`,
+    type: Boolean,
+    default: false,
+    scope: 'world',
+    config: true,
+  })
 }

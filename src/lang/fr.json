@@ -1,6 +1,6 @@
 {
   "I18N.LANGUAGE": "Français",
-  "I18N.MAINTAINERS": "hypnoCode#4242",
+  "I18N.MAINTAINERS": "@alxclark",
   "USERLATENCY.Interval": "Intervalle de latence en secondes",
   "USERLATENCY.IntervalHint": "Temps de latence en secondes entre chaque requête. Minimum de 10 secondes. Entre 20-40 est suffisant.",
   "USERLATENCY.Hide": "Cacher la latence",

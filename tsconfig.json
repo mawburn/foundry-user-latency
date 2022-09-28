@@ -13,5 +13,5 @@
     "noImplicitAny": false,
     "types": ["@league-of-foundry-developers/foundry-vtt-types"]
   },
-  "exclude": ["node_modules/*"]
+  "include": ["src/**/*", "@league-of-foundry-developers/foundry-vtt-types"]
 }
