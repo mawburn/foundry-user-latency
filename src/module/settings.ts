@@ -15,10 +15,10 @@ export const registerSettings = () => {
     scope: 'world',
     config: true,
   })
-  ;(game as Game).settings.register(MODULE_NAME, 'showLatency', {
+  ;(game as Game).settings.register(MODULE_NAME, 'hideLatency', {
     name: `${(game as any).i18n.localize('USERLATENCY.Hide')}`,
     type: Boolean,
-    default: true,
+    default: false,
     scope: 'world',
     config: true,
   })

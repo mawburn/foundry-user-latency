@@ -39,6 +39,10 @@ export class PlayerList {
     let elm = document.getElementById(elmId) as HTMLSpanElement
 
     if (!playerLatency || !showLatency) {
+      if (elm) {
+        elm.classList.add(this.getClass('hidden'))
+      }
+
       return
     }
 
