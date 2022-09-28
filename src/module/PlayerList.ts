@@ -9,8 +9,8 @@ export class PlayerList {
   private cssBase = 'userLatency_' as const
   private playerLatencyTimes: LatencyTimes = {}
 
-  getId = (id: string) => `${this.cssBase}LatencyText--${id}`
-  getClass = (mod?: string) => `${this.cssBase}LatencySpan${mod ? `--${mod}` : ''}`
+  getId = (id: string) => `${this.cssBase}latencyText--${id}`
+  getClass = (mod?: string) => `${this.cssBase}latencySpan${mod ? `--${mod}` : ''}`
 
   registerListeners = () => {
     if ((game as Game).socket) {
