@@ -34,11 +34,11 @@ export class PlayerList {
 
   updateLatencyText = (playerId: string) => {
     const playerLatency = this.playerLatencyTimes[playerId]
-    const showLatency = (game as Game).settings.get(MODULE_NAME, 'showLatency')
+    const hideLatency = (game as Game).settings.get(MODULE_NAME, 'hideLatency')
     const elmId = this.getId(playerId)
     let elm = document.getElementById(elmId) as HTMLSpanElement
 
-    if (!playerLatency || !showLatency) {
+    if (!playerLatency || hideLatency) {
       if (elm) {
         elm.classList.add(this.getClass('hidden'))
       }
