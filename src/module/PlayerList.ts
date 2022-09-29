@@ -44,7 +44,7 @@ export class PlayerList {
       }
 
       return
-    } else {
+    } else if (elm?.classList?.length > 0) {
       elm.classList.remove(this.getClass('hidden'))
     }
 
