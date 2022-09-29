@@ -3,8 +3,7 @@
   flex: 0;
   color: #fdfdfd;
   margin: 0 0.1rem;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
+  padding: 0.1rem 0.25rem;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 2px;
   font-size: 0.75rem;
@@ -46,7 +45,9 @@
   justify-content: center;
   border-radius: 50%;
   width: 1rem;
+  min-width: 1rem;
   height: 1.1rem;
+  min-height: 1.1rem;
   padding-bottom: 0.1rem;
   padding-left: 0.1rem;
   padding-right: 0.1rem;

@@ -40,10 +40,12 @@ export class PlayerList {
 
     if (!playerLatency || hideLatency) {
       if (elm) {
-        elm.classList.add(this.getClass('hidden'))
+        elm.className = this.getClass('hidden')
       }
 
       return
+    } else {
+      elm.classList.remove(this.getClass('hidden'))
     }
 
     if (!elm) {
@@ -60,6 +62,7 @@ export class PlayerList {
       elm.title = `${playerLatency}ms`
       elm.classList.add('microLatency')
     } else {
+      elm.classList.remove('microLatency')
       elm.innerHTML = `${playerLatency}<em>ms</em>`
     }
 
