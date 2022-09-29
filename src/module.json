@@ -2,7 +2,7 @@
   "name": "user-latency",
   "title": "User Latency",
   "description": "Display average latency for users.",
-  "version": "1.2.23",
+  "version": "1.3.2",
   "author": "hypnoCode",
   "authors": [
     {
@@ -13,10 +13,10 @@
   ],
   "scripts": [],
   "esmodules": [
-    "logger-WE3N0XBhfXJuvJ.js"
+    "logger-XqBPUTH42.js"
   ],
   "styles": [
-    "logger-WE3N0XBhfXJuvJ.css"
+    "logger-XqBPUTH42.css"
   ],
   "packs": [],
   "languages": [
@@ -34,12 +34,17 @@
       "lang": "fr",
       "name": "Français",
       "path": "lang/fr.json"
+    },
+    {
+      "lang": "zn_CH",
+      "name": "英语",
+      "path": "lang/zn-CH.json"
     }
   ],
   "socket": true,
   "url": "https://github.com/mawburn/foundry-user-latency",
   "manifest": "https://raw.githubusercontent.com/mawburn/foundry-user-latency/main/src/module.json",
-  "download": "https://github.com/mawburn/foundry-user-latency/releases/download/v1.2.23/module.zip",
+  "download": "https://github.com/mawburn/foundry-user-latency/releases/download/v1.3.2/module.zip",
   "license": "GNU AGPLv3",
   "readme": "https://github.com/mawburn/foundry-user-latency/blob/main/README.md",
   "bugs": "https://github.com/mawburn/foundry-user-latency/issues",

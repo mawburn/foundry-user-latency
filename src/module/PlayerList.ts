@@ -56,14 +56,12 @@ export class PlayerList {
     const level = playerLatency <= 100 ? 'good' : playerLatency < 250 ? 'low' : 'bad'
 
     if (microLatency) {
-      elm.innerHTML = level === 'good' ? '+' : level === 'low' ? '-' : '&nbsp;'
+      elm.innerHTML = level === 'good' ? '+' : level === 'low' ? '&nbsp;' : '-'
       elm.title = `${playerLatency}ms`
       elm.classList.add('microLatency')
     } else {
       elm.innerHTML = `${playerLatency}<em>ms</em>`
     }
-
-    elm.className = this.getClass()
 
     elm.classList.add(this.getClass(level))
   }

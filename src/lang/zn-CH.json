@@ -1,0 +1,8 @@
+{
+  "I18N.LANGUAGE": "英语",
+  "I18N.MAINTAINERS": "@qiandongyq",
+  "USERLATENCY.Interval": "延迟间隔(秒)",
+  "USERLATENCY.IntervalHint": "最少10秒延迟，理想延迟间隔应在20秒到40秒之间",
+  "USERLATENCY.Hide": "完全隐藏延迟显示",
+  "USERLATENCY.Micro": "只显示圆点，不显示数字"
+}
