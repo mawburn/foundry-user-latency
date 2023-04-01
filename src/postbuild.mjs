@@ -21,6 +21,7 @@ const data = {
   ],
   scripts: [],
   esmodules: [`userlatency-${newId}.js`],
+  styles: [`userlatency-${newId}.css`],
   packs: [],
   languages: [
     {
@@ -47,7 +48,7 @@ const data = {
   socket: true,
   url: 'https://github.com/mawburn/foundry-user-latency',
   manifest: 'https://raw.githubusercontent.com/mawburn/foundry-user-latency/main/src/module.json',
-  download: 'https://github.com/mawburn/foundry-user-latency/releases/download/v1.3.9/module.zip',
+  download: `https://github.com/mawburn/foundry-user-latency/releases/download/v${pkg.version}/module.zip`,
   license: 'GNU AGPLv3',
   readme: 'https://github.com/mawburn/foundry-user-latency/blob/main/README.md',
   bugs: 'https://github.com/mawburn/foundry-user-latency/issues',
@@ -63,4 +64,6 @@ const data = {
 
 fs.renameSync('dist/main.js', `dist/logger-${newId}.js`)
 fs.renameSync('dist/main.js.map', `dist/logger-${newId}.js.map`)
+fs.renameSync('dist/main.css', `dist/logger-${newId}.css`)
+fs.renameSync('dist/main.css.map', `dist/logger-${newId}.css.map`)
 fs.writeFileSync('dist/module.json', JSON.stringify(data, null, 2))

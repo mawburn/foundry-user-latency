@@ -1,13 +1,11 @@
-import styles from 'bundle-text:./style.module.css'
+import { registerSettings } from './module/settings'
+import { WebLatency } from './module/WebLatency'
 import { REG_NAME } from './constants'
 
 Hooks.once('init', async function () {
   console.log(`${REG_NAME} | Initializing ${REG_NAME}`)
-  const style = document.createElement('style')
-  style.textContent = styles
-  document.appendChild(style)
 
-  // TODO: Register custom module settings
+  registerSettings()
 
   console.log(`${REG_NAME} | Init finished`)
 })
@@ -15,8 +13,10 @@ Hooks.once('init', async function () {
 Hooks.once('ready', function () {
   console.log(`${REG_NAME} | Is Ready`)
 
-  // wait for things to get loaded
+  const webLatency = new WebLatency()
+  webLatency.doLatencies()
+
   setTimeout(() => {
-    // TODO: Do stuff
+    webLatency.doLatencies()
   }, 10000)
 })
