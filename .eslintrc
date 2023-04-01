@@ -15,7 +15,7 @@
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": false
   },
   "settings": {
     "import/extensions": [".js"]
