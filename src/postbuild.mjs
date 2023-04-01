@@ -20,7 +20,7 @@ const data = {
     },
   ],
   scripts: [],
-  esmodules: [`logger-${newId}.js`],
+  esmodules: [`userlatency-${newId}.js`],
   packs: [],
   languages: [
     {
