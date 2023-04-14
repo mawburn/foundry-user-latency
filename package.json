@@ -2,29 +2,25 @@
   "private": true,
   "name": "user-latency",
   "version": "2.0.0",
-  "source": "src/index.ts",
-  "main": "dist/main.js",
-  "types": "dist/types.d.ts",
+  "type": "module",
   "description": "Display average latency in user list.",
-  "browserslist": "> 0.5%, last 2 versions, chrome 94, not dead",
-  "targets": {
-    "main": {
-      "optimize": true
-    }
-  },
   "scripts": {
     "prebuild": "rm -rf dist && mkdir dist && cp -r src/lang dist/lang && cp -r README.md dist/README.md && cp -r LICENSE dist/LICENSE",
     "build": "parcel build",
-    "postbuild": "node src/postbuild.mjs && bestzip dist/module.zip dist/*"
+    "postbuild": "ts-node src/postbuild.ts && bestzip dist/module.zip dist/*"
   },
   "author": "mawburn <mawburn7@gmail.com>",
   "license": "GNU AGPLv3",
   "devDependencies": {
     "@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
+    "@parcel/config-default": "^2.8.3",
+    "@parcel/optimizer-cssnano": "^2.8.3",
     "@parcel/packager-ts": "2.8.3",
+    "@parcel/transformer-css": "^2.8.3",
     "@parcel/transformer-inline-string": "2.8.3",
     "@parcel/transformer-typescript-tsc": "^2.8.3",
     "@parcel/transformer-typescript-types": "2.8.3",
+    "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "bestzip": "^2.2.1",
@@ -37,7 +33,26 @@
     "postcss": "^8.3.6",
     "prettier": "^2.3.2",
     "prettier-eslint": "^15.0.1",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.3",
     "yargs": "^17.7.1"
-  }
+  },
+  "@parcel/transformer-css": {
+    "cssModules": {
+      "global": true,
+      "pattern": "[hash]-[local]"
+    }
+  },
+  "browserslist": "> 0.5%, last 2 versions, chrome 94, not dead",
+  "targets": {
+    "default": {
+      "context": "browser",
+      "optimize": true,
+      "engines": {
+        "browsers": "> 0.5%, last 2 versions, chrome 94, not dead"
+      },
+      "outputFormat": "global"
+    }
+  },
+  "source": "src/index.ts"
 }

@@ -1,9 +1,9 @@
-import { MODULE_NAME } from '../constants'
+import { MODULE_NAME, gameInstance } from '../constants'
 
 export const registerSettings = () => {
-  ;(game as Game).settings.register(MODULE_NAME, 'latencyInterval', {
-    name: `${(game as any).i18n.localize('USERLATENCY.Interval')}`,
-    hint: `${(game as any).i18n.localize('USERLATENCY.IntervalHint')}`,
+  gameInstance.settings.register(MODULE_NAME, 'latencyInterval', {
+    name: `${gameInstance.i18n.localize('USERLATENCY.Interval')}`,
+    hint: `${gameInstance.i18n.localize('USERLATENCY.IntervalHint')}`,
     type: Number,
     // @ts-ignore
     range: {
@@ -15,15 +15,17 @@ export const registerSettings = () => {
     scope: 'world',
     config: true,
   })
-  ;(game as Game).settings.register(MODULE_NAME, 'hideLatency', {
-    name: `${(game as any).i18n.localize('USERLATENCY.Hide')}`,
+
+  gameInstance.settings.register(MODULE_NAME, 'hideLatency', {
+    name: `${gameInstance.i18n.localize('USERLATENCY.Hide')}`,
     type: Boolean,
     default: false,
     scope: 'world',
     config: true,
   })
-  ;(game as Game).settings.register(MODULE_NAME, 'microLatency', {
-    name: `${(game as any).i18n.localize('USERLATENCY.Micro')}`,
+
+  gameInstance.settings.register(MODULE_NAME, 'microLatency', {
+    name: `${gameInstance.i18n.localize('USERLATENCY.Micro')}`,
     type: Boolean,
     default: false,
     scope: 'world',

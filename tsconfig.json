@@ -12,7 +12,11 @@
     "strict": true,
     "noImplicitAny": false,
     "resolveJsonModule": true,
-    "types": ["@league-of-foundry-developers/foundry-vtt-types"]
+    "types": ["@league-of-foundry-developers/foundry-vtt-types", "./types.d.ts"]
   },
-  "include": ["src/**/*", "@league-of-foundry-developers/foundry-vtt-types"]
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "include": ["src/**/*", "@league-of-foundry-developers/foundry-vtt-types", "./types.d.ts"]
 }

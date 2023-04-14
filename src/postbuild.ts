@@ -5,6 +5,9 @@ import pkg from '../package.json' assert { type: 'json' }
 
 const nanoid = customAlphabet('1234567890abcdefhijklmnopqrstuvwxyz', 7)
 const newId = nanoid()
+const prefix = 'userlatency-'
+
+const generateFileName = fileName => `${prefix}${newId}${fileName}`
 
 const data = {
   id: 'user-latency',
@@ -20,30 +23,14 @@ const data = {
     },
   ],
   scripts: [],
-  esmodules: [`userlatency-${newId}.js`],
-  styles: [`userlatency-${newId}.css`],
+  esmodules: [generateFileName('.js')],
+  styles: [generateFileName('.css')],
   packs: [],
   languages: [
-    {
-      lang: 'en',
-      name: 'English',
-      path: 'lang/en.json',
-    },
-    {
-      lang: 'es',
-      name: 'Español',
-      path: 'lang/es.json',
-    },
-    {
-      lang: 'fr',
-      name: 'Français',
-      path: 'lang/fr.json',
-    },
-    {
-      lang: 'zh-CH',
-      name: '英语',
-      path: 'lang/zh-CH.json',
-    },
+    { lang: 'en', name: 'English', path: 'lang/en.json' },
+    { lang: 'es', name: 'Español', path: 'lang/es.json' },
+    { lang: 'fr', name: 'Français', path: 'lang/fr.json' },
+    { lang: 'zh-CH', name: '英语', path: 'lang/zh-CH.json' },
   ],
   socket: true,
   url: 'https://github.com/mawburn/foundry-user-latency',
@@ -62,8 +49,17 @@ const data = {
   },
 }
 
-fs.renameSync('dist/main.js', `dist/logger-${newId}.js`)
-fs.renameSync('dist/main.js.map', `dist/logger-${newId}.js.map`)
-fs.renameSync('dist/main.css', `dist/logger-${newId}.css`)
-fs.renameSync('dist/main.css.map', `dist/logger-${newId}.css.map`)
+const renameFiles = [
+  { src: 'dist/index.js', dest: `dist/logger-${newId}.js` },
+  { src: 'dist/index.js.map', dest: `dist/logger-${newId}.js.map` },
+  { src: 'dist/index.css', dest: `dist/logger-${newId}.css` },
+  { src: 'dist/index.css.map', dest: `dist/logger-${newId}.css.map` },
+]
+
+setTimeout(() => {
+  renameFiles.forEach(({ src, dest }) => {
+    fs.renameSync(src, dest)
+  })
+}, 1000)
+
 fs.writeFileSync('dist/module.json', JSON.stringify(data, null, 2))

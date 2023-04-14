@@ -14,9 +14,9 @@ Hooks.once('ready', function () {
   console.log(`${REG_NAME} | Is Ready`)
 
   const webLatency = new WebLatency()
-  webLatency.doLatencies()
+  webLatency.measureLatency()
 
   setTimeout(() => {
-    webLatency.doLatencies()
+    webLatency.monitorLatency()
   }, 10000)
 })
