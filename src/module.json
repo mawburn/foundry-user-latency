@@ -39,6 +39,11 @@
       "lang": "zh-CH",
       "name": "英语",
       "path": "lang/zh-CH.json"
+    },
+    {
+      "lang": "zh-tw",
+      "name": "正體中文",
+      "path": "lang/zh-tw.json"
     }
   ],
   "socket": true,
