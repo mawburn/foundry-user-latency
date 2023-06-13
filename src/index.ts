@@ -1,4 +1,4 @@
-import { registerSettings } from './module/settings'
+import { registerSettings } from './module/Settings'
 import { WebLatency } from './module/WebLatency'
 import { REG_NAME } from './constants'
 
@@ -14,7 +14,6 @@ Hooks.once('ready', function () {
   console.log(`${REG_NAME} | Is Ready`)
 
   const webLatency = new WebLatency()
-  webLatency.measureLatency()
 
   setTimeout(() => {
     webLatency.monitorLatency()

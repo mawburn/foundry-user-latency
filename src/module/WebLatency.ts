@@ -6,11 +6,10 @@ export interface Pong {
   average: number
 }
 
-const gameInstance = game as Game
-
 export class WebLatency {
   private static readonly HISTORY_SIZE = 10
   private static readonly MIN_INTERVAL_SECONDS = 10
+  private intervalSeconds: number
 
   private latencyArr: number[] = []
   private playerList: PlayerList
@@ -19,6 +18,7 @@ export class WebLatency {
     this.playerList = new PlayerList()
     this.playerList.registerListeners()
     this.monitorLatency()
+    this.intervalSeconds = 30
   }
 
   measureLatency = async () => {
@@ -27,29 +27,31 @@ export class WebLatency {
 
   monitorLatency = async () => {
     while (true) {
+      this.setIntervalSetting()
       await this.sleep()
       await this.performLatencyMeasurement()
     }
   }
 
-  getIntervalSetting = () => {
-    console.log(gameInstance, gameInstance.settings)
-    return (gameInstance.settings.get(MODULE_NAME, 'latencyInterval') as number) ?? 30
+  setIntervalSetting = () => {
+    const interval = (game as Game).settings.get(MODULE_NAME, 'latencyInterval') as number
+    const currentInterval = interval ?? this.intervalSeconds
+    this.intervalSeconds = Math.max(currentInterval, WebLatency.MIN_INTERVAL_SECONDS) * 1000
   }
 
-  private sleep = () => {
-    const intervalSeconds = Math.max(this.getIntervalSetting(), WebLatency.MIN_INTERVAL_SECONDS)
-    return new Promise(res => setTimeout(res, intervalSeconds * 1000))
-  }
+  private sleep = () => new Promise(res => setTimeout(res, this.intervalSeconds))
 
   private performLatencyMeasurement = async () => {
     try {
+      const gameInstance = game as Game
+      if (!gameInstance.socket?.connected || !gameInstance?.user?.id) return
+
       const startTime = Date.now()
-      await (game as any).time.sync()
+      await gameInstance.time.sync()
       const delta = Date.now() - startTime
 
       this.latencyArr.push(delta)
-      this.sendPong((game as any).user?.id, this.computeAverage())
+      this.sendPong(gameInstance.user.id, this.computeAverage())
     } catch (err) {
       console.log(err)
     }
@@ -62,6 +64,8 @@ export class WebLatency {
   }
 
   private sendPong = (userId: string, average: number) => {
+    const gameInstance = game as Game
+
     const pong: Pong = { userId, average }
     gameInstance.socket?.emit(`module.${MODULE_NAME}`, pong)
     this.playerList.updateSelf(pong)

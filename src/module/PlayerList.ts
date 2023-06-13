@@ -7,8 +7,6 @@ interface LatencyTimes {
   [key: string]: number
 }
 
-const gameInstance = game as Game
-
 export class PlayerList {
   private playerLatencyTimes: LatencyTimes = {}
 
@@ -39,6 +37,8 @@ export class PlayerList {
   }
 
   updateLatencyText = (playerId: string) => {
+    const gameInstance = game as Game
+
     const playerLatency = this.playerLatencyTimes[playerId]
     const hideLatency = gameInstance.settings.get(MODULE_NAME, 'hideLatency')
     const elmId = this.getId(playerId)
@@ -59,9 +59,11 @@ export class PlayerList {
       elm.innerHTML =
         level === styles.userSpanGood ? '+' : level === styles.userSpanLow ? '&nbsp;' : '-'
       elm.title = `${playerLatency}ms`
+      elm.classList.remove(styles.userSpan)
       elm.classList.add(styles.microLatency)
     } else {
       elm.classList.remove(styles.microLatency)
+      elm.classList.add(styles.userSpan)
       elm.innerHTML = `${playerLatency}<em>ms</em>`
     }
 
