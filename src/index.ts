@@ -1,5 +1,4 @@
-import './style.scss'
-import { registerSettings } from './module/settings'
+import { registerSettings } from './module/Settings'
 import { WebLatency } from './module/WebLatency'
 import { REG_NAME } from './constants'
 
@@ -16,8 +15,7 @@ Hooks.once('ready', function () {
 
   const webLatency = new WebLatency()
 
-  // wait for things to get loaded
   setTimeout(() => {
-    webLatency.doLatencies()
+    webLatency.monitorLatency()
   }, 10000)
 })

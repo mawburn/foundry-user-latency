@@ -11,7 +11,12 @@
     "target": "ES2020",
     "strict": true,
     "noImplicitAny": false,
-    "types": ["@league-of-foundry-developers/foundry-vtt-types"]
+    "resolveJsonModule": true,
+    "types": ["@league-of-foundry-developers/foundry-vtt-types", "./types.d.ts"]
   },
-  "include": ["src/**/*", "@league-of-foundry-developers/foundry-vtt-types"]
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "include": ["src/**/*", "@league-of-foundry-developers/foundry-vtt-types", "./types.d.ts"]
 }
