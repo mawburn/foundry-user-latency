@@ -41,11 +41,11 @@ const data = {
   bugs: 'https://github.com/mawburn/foundry-user-latency/issues',
   changelog: 'https://github.com/mawburn/foundry-user-latency/releases',
   minimumCoreVersion: 10,
-  maximumCoreVersion: 10,
-  compatibleCoreVersion: 10,
+  maximumCoreVersion: 11,
+  compatibleCoreVersion: 11,
   compatibility: {
     minimum: '10',
-    verified: '10',
+    verified: '11',
   },
 }
 

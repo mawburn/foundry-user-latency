@@ -1,0 +1,8 @@
+{
+  "I18N.LANGUAGE": "正體中文",
+  "I18N.MAINTAINERS": "zzz#8939",
+  "USERLATENCY.Interval": "延遲間隔(秒)",
+  "USERLATENCY.IntervalHint": "最少10秒延遲，理想延遲間隔應在20秒到40秒之間",
+  "USERLATENCY.Hide": "完全隱藏延遲顯示",
+  "USERLATENCY.Micro": "只顯示圓點，不顯示數字"
+}
