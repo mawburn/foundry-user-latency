@@ -1,6 +1,8 @@
-import { MODULE_NAME, gameInstance } from '../constants'
+import { MODULE_NAME } from '../constants'
 
 export const registerSettings = () => {
+  const gameInstance = game as Game
+
   gameInstance.settings.register(MODULE_NAME, 'latencyInterval', {
     name: `${gameInstance.i18n.localize('USERLATENCY.Interval')}`,
     hint: `${gameInstance.i18n.localize('USERLATENCY.IntervalHint')}`,

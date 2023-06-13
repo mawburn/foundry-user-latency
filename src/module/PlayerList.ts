@@ -1,11 +1,13 @@
 import * as styles from '../style.module.css'
-import { MODULE_NAME, gameInstance } from '../constants'
+import { MODULE_NAME } from '../constants'
 
 import type { Pong } from './WebLatency'
 
 interface LatencyTimes {
   [key: string]: number
 }
+
+const gameInstance = game as Game
 
 export class PlayerList {
   private playerLatencyTimes: LatencyTimes = {}

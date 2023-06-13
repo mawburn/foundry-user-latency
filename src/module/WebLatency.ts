@@ -1,10 +1,12 @@
-import { MODULE_NAME, gameInstance } from '../constants'
+import { MODULE_NAME } from '../constants'
 import { PlayerList } from './PlayerList'
 
 export interface Pong {
   userId: string
   average: number
 }
+
+const gameInstance = game as Game
 
 export class WebLatency {
   private static readonly HISTORY_SIZE = 10
@@ -30,12 +32,14 @@ export class WebLatency {
     }
   }
 
-  getIntervalSetting = () =>
-    (gameInstance.settings.get(MODULE_NAME, 'latencyInterval') as number) ?? 30
+  getIntervalSetting = () => {
+    console.log(gameInstance, gameInstance.settings)
+    return (gameInstance.settings.get(MODULE_NAME, 'latencyInterval') as number) ?? 30
+  }
 
   private sleep = () => {
     const intervalSeconds = Math.max(this.getIntervalSetting(), WebLatency.MIN_INTERVAL_SECONDS)
-    return new Promise<void>(res => setTimeout(res, intervalSeconds * 1000))
+    return new Promise(res => setTimeout(res, intervalSeconds * 1000))
   }
 
   private performLatencyMeasurement = async () => {
