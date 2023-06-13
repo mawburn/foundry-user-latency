@@ -50,10 +50,10 @@ const data = {
 }
 
 const renameFiles = [
-  { src: 'dist/index.js', dest: `dist/logger-${newId}.js` },
-  { src: 'dist/index.js.map', dest: `dist/logger-${newId}.js.map` },
-  { src: 'dist/index.css', dest: `dist/logger-${newId}.css` },
-  { src: 'dist/index.css.map', dest: `dist/logger-${newId}.css.map` },
+  { src: 'dist/index.js', dest: `dist/${generateFileName('.js')}` },
+  { src: 'dist/index.js.map', dest: `dist/${generateFileName('.js.map')}` },
+  { src: 'dist/index.css', dest: `dist/${generateFileName('.css')}` },
+  { src: 'dist/index.css.map', dest: `dist/${generateFileName('.css.map')}` },
 ]
 
 setTimeout(() => {

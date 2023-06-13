@@ -7,7 +7,7 @@
   "scripts": {
     "prebuild": "rm -rf dist && mkdir dist && cp -r src/lang dist/lang && cp -r README.md dist/README.md && cp -r LICENSE dist/LICENSE",
     "build": "parcel build",
-    "postbuild": "ts-node src/postbuild.ts && bestzip dist/module.zip dist/*"
+    "postbuild": "ts-node src/postbuild.ts && cd dist && bestzip module.zip *"
   },
   "author": "mawburn <mawburn7@gmail.com>",
   "license": "GNU AGPLv3",
