@@ -13,7 +13,7 @@ const data = {
   id: 'user-latency',
   title: 'User Latency',
   description: pkg.description,
-  version: pkg.version,
+  version: `v${pkg.version}`,
   author: 'hypnoCode',
   authors: [
     {
